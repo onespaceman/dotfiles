@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+time1=$(date '+%I:%M')
+date=$(date '+%m/%d')
+
+case $BLOCK_BUTTON in
+    1|2|3) echo $date ;;
+    *) echo $time1 ;;
+esac
