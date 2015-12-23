@@ -1,0 +1,32 @@
+/* mpd */
+mpd_host = "localhost"
+mpd_port = "6600"
+mpd_crossfade_time = "2"
+mpd_music_dir = "/mnt/backupdrive/Music"
+
+/* UI */
+
+startup_screen = "visualizer"
+titles_visibility="no"
+autocenter_mode = "yes"
+header_visibility = "no"
+statusbar_visibility = "no"
+
+enable_window_title = "yes"
+progressbar_look = "   "
+
+
+user_interface="classic"
+alternative_ui_separator_color ="black"
+playlist_separate_albums = "no"
+
+colors_enabled = "yes"
+progressbar_color = "black"
+
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_in_stereo = "yes"
+visualizer_output_name = "FIFO"
+visualizer_sync_interval = "15"
+visualizer_type = "spectrum"
+visualizer_look =".─"
+visualizer_color = "blue cyan red yellow"

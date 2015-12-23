@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+font="Roboto"
+font_mono="$font Mono"
+font_mono_bold="$font_mono"
+
+font_bar="$font Medium"
+
+icon_font="FontAwesome"
+backup_font="DejaVu Sans"
+
+font_size="12"
+font_bar_size="11"
+font_rofi_size="16"

@@ -1,0 +1,7 @@
+alias vim='nvim'
+alias sudo='sudo '
+
+#arch
+alias qq='pacman'
+alias qqq='yaourt -Syua'
+alias gmusicproxy="$HOME/.virtualenvs/gmusicproxy/bin/GMusicProxy"

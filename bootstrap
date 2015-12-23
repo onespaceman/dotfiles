@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#symlink using gnu stow
+
+gitdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+if [ "$(uname)" = "Linux" ]; then
+    stow -v${@/-/} -d "$gitdir" -t "$HOME" -S i3 lemonbar ncmpcpp nvim scripts shell
+
+elif [ "$(uname)" = "Darwin" ]; then
+    #first edit files for osx
+
+    #edit .aliases
+    sed -e "/#arch/q;p" $gitdir/shell/.aliases > $gitdir/osx/.aliases
+
+    #edit .zshrc
+    sed -e '/#virtualenvs/{N;N;d;}' $gitdir/shell/.zshrc > $gitdir/osx/.zshrc
+
+    #edit zpreztorc
+    sed -e "s/'pacman'/'osx' \\\\\\
+\ \ 'homebrew'/g" -e "/zstyle ':prezto:module:pacman' frontend/s/^/#/g" $gitdir/shell/.zpreztorc > $gitdir/osx/.zpreztorc
+
+    #stow the packages
+    stow -v${@/-/} -d "$gitdir" -t "$HOME" -S nvim osx
+fi
+

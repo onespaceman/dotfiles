@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-echo ""
-echo ""
-echo "#d79921"
-case $BLOCK_BUTTON in
-    1) rofi -show run -terminal urxvt -font "Roboto 16" -lines 8 -bw 1 -bc "#282828" -bg "#282828" -fg "#928374" -hlbg "#458588" -hlfg "#ebdbb2" -no-levenshtein-sort & ;;
-esac

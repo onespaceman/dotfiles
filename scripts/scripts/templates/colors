@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+##############
+#color schemes
+#color0 - color15
+
+#gruvbox
+#colors=('#1d2021' '#cc241d' '#98971a' '#d79921' '#458588' '#b16286' '#689d6a' '#a89984' '#928374' '#fb4934' '#b8bb26' '#fabd2f' '#83a598' '#d3869b' '#8ec07c' '#ebdbb2')
+
+#base-16-eighties, customized
+#colors=( '#1d2021' '#f2777a' '#99cc99' '#ffcc66' '#6699cc' '#cc99cc' '#66cccc' '#d3d0c8' '#747369' '#f2777a' '#99cc99' '#ffcc66' '#6699cc' '#cc99cc' '#66cccc' '#f2f0ec')
+
+#custom
+#colors=('#1d2021' '#a54242' '#99cc99' '#de935f' '#5f819d' '#85678f' '#5e8d87' '#707880' '#a5b6bc' '#cc6666' '#aae3aa' '#f0c674' '#81a2be' '#b294bb' '#8abeb7' '#c5c8c6')
+colors=('#1d2021' '#a54242' '#99cc99' '#de935f' '#5f819d' '#85678f' '#5e8d87' '#5a6066' '#a5b6bc' '#cc6666' '#aae3aa' '#f0c674' '#81a2be' '#b294bb' '#8abeb7' '#c5c8c6')
+
+
+############
+
+###
+background="${colors[0]}"
+foreground="${colors[15]}"
+
+black="${colors[0]}"
+darkgrey="${colors[8]}"
+
+darkred="${colors[1]}"
+red="${colors[9]}"
+
+darkgreen="${colors[2]}"
+green="${colors[10]}"
+
+darkyellow="${colors[3]}"
+yellow="${colors[11]}"
+
+darkblue="${colors[4]}"
+blue="${colors[12]}"
+
+darkmagenta="${colors[5]}"
+magenta="${colors[13]}"
+
+darkcyan="${colors[6]}"
+cyan="${colors[14]}"
+
+lightgrey="${colors[7]}"
+white="${colors[15]}"
+
+#extra colors
+
+orange="${colors[3]}"
+darkorange="#ca6b29"
+
+#vim shades
+
+dark1="#25292A"
+dark2="#323739"
+dark3="#444A4D"
+dark4="#585F63"
+
+light1="#aaadab"
+light2="#969896"
+light3="#858786"
+light4="#787a79"
