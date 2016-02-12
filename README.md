@@ -4,9 +4,11 @@
 ![screenshot of vim and terminal](scrots/vim.png)
 
 ### theme
-+ **colors** _custom_
-+ **fonts** _Roboto_
-+ **wallpaper** *[from pixabay](https://pixabay.com/en/mountain-clouds-landscape-nature-983914/)*
+* **colors** _custom_
+* **fonts** _Roboto_
+* **wallpaper** *[from pixabay](https://pixabay.com/en/mountain-clouds-landscape-nature-983914/)*
+* **gtk theme** *FlatStudioDark*
+* **icons** *Flattr Dark*
 
 ### software
 * **arch** *gnu/linux distro*
@@ -16,6 +18,7 @@
 * **zsh** *shell*
   * **prezto** *zsh config framework*
 * **rofi** *launcher*
+* **thunar** *file manager*
 * **gnu stow** *dotfiles/symlink manager*
 
 #

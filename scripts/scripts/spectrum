@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+#prints a spectrum of colors
+#only work in terminals with 24-bit color support
+
+#specify which character(s) to print
+tt="▇"
+
+#fit to terminal width
+st=$(echo "255 / ( $(tput cols) / 6 )" | bc)
+
+#starting values
+r=255
+g=0
+b=0
+
+#print the colors
+for ((g=0; g<256; g+=$st)); do
+    printf "\x1b[38;2;${r};${g};${b}m$tt\x1b[0m"
+    ((cols++))
+done
+g=255
+
+for ((r=255-$st; r>-1; r-=$st)); do
+    printf "\x1b[38;2;${r};${g};${b}m$tt\x1b[0m"
+    ((cols++))
+done
+r=0
+
+for ((b=0+$st; b<256; b+=$st)); do
+    printf "\x1b[38;2;${r};${g};${b}m$tt\x1b[0m"
+    ((cols++))
+done
+b=255
+
+for ((g=255-$st; g>-1; g-=$st)); do
+    printf "\x1b[38;2;${r};${g};${b}m$tt\x1b[0m"
+    ((cols++))
+done
+g=0
+
+for ((r=0+$st; r<256; r+=$st)); do
+    printf "\x1b[38;2;${r};${g};${b}m$tt\x1b[0m"
+    ((cols++))
+done
+r=255
+
+for ((b=255-$st; b>-1; b-=$st)); do
+    printf "\x1b[38;2;${r};${g};${b}m$tt\x1b[0m"
+    ((cols++))
+
+    #cut off if there are more character than can fit in the terminal width
+    if [ "$cols" -eq "$(tput cols)" ]; then
+        break
+    fi
+done
+r=255
+
+
+#print extra characters to fill terminal width
+while [ "$cols" -lt "$(tput cols)" ]; do
+    printf "\x1b[38;2;${r};${g};${b}m$tt\x1b[0m"
+    ((cols++))
+done
+
+printf "\n"
+
