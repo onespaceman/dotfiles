@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
-#open ncmpcpp and ncmpcpp visualizer in dedicated workspace
-#assumes that i3 config contains:
-#for_window [instance="floating"] floating enable
+#open ncmpcpp and visualizer in tmux session
 
 #start gmusicproxy if not running
 if [[ -z "$(pgrep GMusicProxy)" ]]; then
     $HOME/.virtualenvs/gmusicproxy/bin/GMusicProxy &
 fi
 
-#check if already open
-if [[ -z "$(xwininfo -tree -root | grep floating-music)" ]]; then
-    exec urxvt -g 120x28 -name floating-music1 -e "ncmpcpp" &
-    exec urxvt -g 120x17 -name floating-music2 -e ncmpcpp --config $HOME/.config/ncmpcpp/visualizer  &
-    sleep 0.1s
-    i3-msg -q '[instance="floating-music1"] move container to workspace "♬" border none move up 190px'
-    i3-msg -q '[instance="floating-music2"] move container to workspace "♬" border none move down 218px'
+#start tmux session if not already running
+if [[ -z "$(tmux ls | grep Music)" ]]; then
+    tmux new-session -d -s Music "ncmpcpp"
+    tmux split-window -d -t Music -l 12 "ncmpcpp -c .config/ncmpcpp/visualizer"
+    #get rid of the status bar and borders
+    tmux set -g status off
+    tmux set -g pane-border-fg black
 fi
 
-i3-msg -q 'workspace "♬", focus'
+#open urxvt and attach if not already open
+if [[ -z "$(wmctrl -l | grep Music)" ]]; then
+    urxvt -g 100x40 -T Music -e zsh -c "tmux attach-session -t Music" &
+fi
+
 
