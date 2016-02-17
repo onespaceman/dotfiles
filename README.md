@@ -1,24 +1,24 @@
 ## dotfiles
 
-![screenshot of ncmpcpp](scrots/music.png)
-![screenshot of vim and terminal](scrots/vim.png)
+![ncmpcpp](scrots/music.png)
+![terminal and vim](scrots/vim.png)
+![google chrome](scrots/chrome.png)
 
 ### theme
 * **colors** _custom_
 * **fonts** _Roboto_
 * **wallpaper** *[from pixabay](https://pixabay.com/en/mountain-clouds-landscape-nature-983914/)*
-* **gtk theme** *FlatStudioDark*
-* **icons** *Flattr Dark*
+* **gtk theme** *Iris Dark*
+* **icons** *Paper*
 
 ### software
 * **arch** *gnu/linux distro*
-* **i3-gaps** *window manager*
-* **lemonbar-xft** *status bar*
+* **budgie** *desktop environment*
 * **rxvt-unicode-24bit** *terminal emulator* with full color support
 * **zsh** *shell*
   * **prezto** *zsh config framework*
 * **rofi** *launcher*
-* **thunar** *file manager*
+* **nautilus** *file manager*
 * **gnu stow** *dotfiles/symlink manager*
 
 #
@@ -40,9 +40,10 @@
   * **supertab** *tab completion*
   * **gruvbox** *theme* used as base with customized colors
   * **vim-commentary** *comment out stuff*
-  * **colorizer** *highlight colors*
+  * **vim-gitgutter** *git diff viewer*
 
 ### scripts
 * **bootstrap** symlinks this repository into the appropriate locations using gnu stow. Also modifies certain files for use on OSX
-* **ricemyride** generates configs for Xresources, vim, i3config, etc.
-* **music** opens ncmpcpp and ncmpcpp visualizer in dedicated workspace
+* **ricemyride** generates configs for Xresources, vim, etc.
+* **music** opens ncmpcpp and ncmpcpp visualizer in a tmux session
+* **spectrum** prints the color spectrum in a terminal supporting true color

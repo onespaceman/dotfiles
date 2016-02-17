@@ -7,12 +7,9 @@
 #only tested with xresources, i3 config, and vim theme
 
 #import fonts
-#font, size
-# fonts
 . $HOME/scripts/templates/fonts
 
 #import colors
-#gruvbox
 . $HOME/scripts/templates/colors
 
 #.Xresources
@@ -23,15 +20,6 @@ $(cat ${xresources_template})
 EOF" > "$HOME/.Xresources"
 
 xrdb $HOME/.Xresources
-
-#i3 config
-i3_template="$HOME/scripts/templates/i3.tl"
-
-eval "cat << EOF 
-$(cat ${i3_template})
-EOF" > "$HOME/.config/i3/config"
-
-i3 restart &> /dev/null
 
 #vim config
 vim_template="$HOME/scripts/templates/vim.tl"

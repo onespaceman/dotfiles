@@ -2,6 +2,7 @@ URxvt.saveLines:3000
 URxvt.scrollBar: false
 URxvt.transparent:false
 URxvt.pointerBlink: true
+URxvt.geometry: 80x30
 
 URxvt.perl-ext-common: default,matcher
 URxvt.url-launcher: /usr/bin/google-chrome-beta
@@ -12,7 +13,7 @@ URxvt.boldFont: xft:Roboto Mono:size=12,xft: Droid Sans Mono for Powerline:size=
 URxvt.letterspace: -5
 URxvt.linespace: -1
 
-URxvt.depth: 32
+URxvt.depth: 24
 URxvt*foreground: #c5c8c6
 URxvt*background: [100]#1d2021
 *foreground: #c5c8c6

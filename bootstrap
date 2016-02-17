@@ -5,7 +5,7 @@
 gitdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 if [ "$(uname)" = "Linux" ]; then
-    stow -v${@/-/} -d "$gitdir" -t "$HOME" -S i3 lemonbar ncmpcpp nvim scripts shell
+    stow -v${@/-/} -d "$gitdir" -t "$HOME" -S ncmpcpp nvim scripts shell tmux
 
 elif [ "$(uname)" = "Darwin" ]; then
     #first edit files for osx
