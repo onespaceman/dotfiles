@@ -6,25 +6,27 @@
 #and then edit any values you want to be replace with variables
 #only tested with xresources, i3 config, and vim theme
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 #import fonts
-. $HOME/scripts/templates/fonts
+. $DIR/templates/fonts
 
 #import colors
-. $HOME/scripts/templates/colors
+. $DIR/templates/colors
 
 #.Xresources
-xresources_template="$HOME/scripts/templates/Xresources.tl"
+xresources_template="$DIR/templates/Xresources.tl"
 
-eval "cat << EOF 
+eval "cat << EOF
 $(cat ${xresources_template})
 EOF" > "$HOME/.Xresources"
 
 xrdb $HOME/.Xresources
 
 #vim config
-vim_template="$HOME/scripts/templates/vim.tl"
+vim_template="$DIR/templates/vim.tl"
 
-eval "cat << EOF 
+eval "cat << EOF
 $(cat ${vim_template})
 EOF" > "$HOME/.config/nvim/colors/gruvbox.vim"
 

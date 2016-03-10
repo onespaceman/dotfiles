@@ -4,18 +4,17 @@
 
 gitdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
+#edit files for osx
+#edit .aliases
+sed -e "/#arch/q;p" $gitdir/shell/.aliases > $gitdir/osx/.aliases
+
+#edit .zshrc
+sed -e '/#virtualenvs/{N;N;d;}' $gitdir/shell/.zshrc > $gitdir/osx/.zshrc
+
 if [ "$(uname)" = "Linux" ]; then
     stow -v${@/-/} -d "$gitdir" -t "$HOME" -S ncmpcpp nvim bin shell tmux
 
 elif [ "$(uname)" = "Darwin" ]; then
-    #first edit files for osx
-
-    #edit .aliases
-    sed -e "/#arch/q;p" $gitdir/shell/.aliases > $gitdir/osx/.aliases
-
-    #edit .zshrc
-    sed -e '/#virtualenvs/{N;N;d;}' $gitdir/shell/.zshrc > $gitdir/osx/.zshrc
-
     #stow the packages
     stow -v${@/-/} -d "$gitdir" -t "$HOME" -S nvim osx
 fi

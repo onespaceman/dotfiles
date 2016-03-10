@@ -2,14 +2,14 @@ URxvt.saveLines:3000
 URxvt.scrollBar: false
 URxvt.transparent:false
 URxvt.pointerBlink: true
-URxvt.geometry: 80x30
+URxvt.geometry: 85x30
 
 URxvt.perl-ext-common: default,matcher
 URxvt.url-launcher: /usr/bin/google-chrome-beta
 URxvt.matcher.button: 1
 
-URxvt.font: xft:Roboto Mono:size=12,xft: Droid Sans Mono for Powerline:size=11
-URxvt.boldFont: xft:Roboto Mono:size=12,xft: Droid Sans Mono for Powerline:size=11
+URxvt.font: xft:Roboto Mono:size=12,xft:Droid Sans Mono for Powerline:size=13
+URxvt.boldFont: xft:Roboto Mono:size=12,xft:Droid Sans Mono for Powerline:size=13
 URxvt.letterspace: -5
 URxvt.linespace: -1
 
@@ -44,12 +44,14 @@ URxvt*background: [100]#1d2021
 *color7: #5a6066
 *color15: #c5c8c6
 
-rofi.lines: 10
+rofi.lines: 3
 rofi.font: Roboto 16
+rofi.width: 17
+rofi.padding: 10
 rofi.location: 0
 rofi.yoffset: -200
 rofi.color-enabled: true
-rofi.color-window: #1d2021, #1d2021, #1d2021
+rofi.color-window: #1d2021, #5f819d, #1d2021
 rofi.color-normal: #1d2021, #a5b6bc, #1d2021, #5f819d, #c5c8c6
 rofi.color-urgent: #1d2021, #a5b6bc, #1d2021, #5f819d, #c5c8c6
 rofi.color-active: #1d2021, #a5b6bc, #1d2021, #5f819d, #c5c8c6
