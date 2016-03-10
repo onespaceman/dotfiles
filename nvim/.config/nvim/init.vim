@@ -1,13 +1,17 @@
 " theme
+let $NVIM_TUI_ENABLE_TRUE_COLOR=0
 colorscheme gruvbox
 set bg=dark
 syntax on
+
+" map space to leader
+map <Space> :
 
 " tabs and spaces
 filetype indent on " load filetype-specific indent files
 set tabstop=4 " number of visual spaces per TAB
 set softtabstop=4 " number of spaces in tab when editing
-set shiftwidth=4 
+set shiftwidth=4
 set expandtab " tabs are spaces
 
 " gui options
