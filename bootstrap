@@ -12,10 +12,10 @@ sed -e "/#arch/q;p" $gitdir/shell/.aliases > $gitdir/osx/.aliases
 sed -e '/#virtualenvs/{N;N;d;}' $gitdir/shell/.zshrc > $gitdir/osx/.zshrc
 
 if [ "$(uname)" = "Linux" ]; then
-    stow -v${@/-/} -d "$gitdir" -t "$HOME" -S ncmpcpp nvim bin shell tmux
+    stow -v${@/-/} -d "$gitdir" -t "$HOME" -S ncmpcpp nvim bin shell tmux git
 
 elif [ "$(uname)" = "Darwin" ]; then
     #stow the packages
-    stow -v${@/-/} -d "$gitdir" -t "$HOME" -S nvim osx
+    stow -v${@/-/} -d "$gitdir" -t "$HOME" -S nvim osx git
 fi
 

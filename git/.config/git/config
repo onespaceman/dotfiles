@@ -1,0 +1,38 @@
+[user]
+    name = onespaceman
+    email = onespaceman@users.noreply.github.com
+[core]
+    autocrlf = input
+    safecrlf = true
+    editor = nvim
+[credential]
+    helper = lastpass
+
+[color]
+    ui = true
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = red
+[format]
+    pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+
+[alias]
+    s = status
+    br = branch -av
+    p = pull
+    pu = push origin master
+
+[url "https://github.com/"]
+    insteadOf = gh:
+[url "https://gist.github.com/"]
+    insteadOf = gist:
