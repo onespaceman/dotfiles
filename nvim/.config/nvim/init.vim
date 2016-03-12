@@ -2,7 +2,6 @@
 let $NVIM_TUI_ENABLE_TRUE_COLOR=0
 colorscheme gruvbox
 set bg=dark
-syntax on
 
 " map space to leader
 map <Space> :
@@ -13,6 +12,7 @@ set tabstop=4 " number of visual spaces per TAB
 set softtabstop=4 " number of spaces in tab when editing
 set shiftwidth=4
 set expandtab " tabs are spaces
+set smartindent
 
 " gui options
 set number " show line numbers
@@ -37,6 +37,7 @@ set undofile
 set undodir=~/.config/nvim/undo
 set undolevels=1000
 set clipboard+=unnamedplus
+set hidden
 
 "splits and tabs
 set splitbelow

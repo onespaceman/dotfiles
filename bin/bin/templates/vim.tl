@@ -391,10 +391,15 @@ endfunction
 " memoize common hi groups
 call s:HL('GruvboxFg0', s:fg0)
 call s:HL('GruvboxFg1', s:fg1)
+call s:HL('GruvboxFg2', s:fg2)
 call s:HL('GruvboxFg3', s:fg3)
 call s:HL('GruvboxFg4', s:fg4)
 call s:HL('GruvboxGray', s:gray)
+call s:HL('GruvboxBg0', s:bg0)
+call s:HL('GruvboxBg1', s:bg1)
 call s:HL('GruvboxBg2', s:bg2)
+call s:HL('GruvboxBg3', s:bg3)
+call s:HL('GruvboxBg4', s:bg4)
 
 call s:HL('GruvboxRed', s:red)
 call s:HL('GruvboxRedBold', s:red, s:none, s:bold)
@@ -403,9 +408,9 @@ call s:HL('GruvboxGreenBold', s:green, s:none, s:bold)
 call s:HL('GruvboxYellow', s:yellow)
 call s:HL('GruvboxYellowBold', s:yellow, s:none, s:bold)
 call s:HL('GruvboxBlue', s:blue)
-" call s:HL('GruvboxBlueBold', s:blue, s:none, s:bold)
+call s:HL('GruvboxBlueBold', s:blue, s:none, s:bold)
 call s:HL('GruvboxPurple', s:purple)
-" call s:HL('GruvboxPurpleBold', s:purple, s:none, s:bold)
+call s:HL('GruvboxPurpleBold', s:purple, s:none, s:bold)
 call s:HL('GruvboxAqua', s:aqua)
 call s:HL('GruvboxAquaBold', s:aqua, s:none, s:bold)
 call s:HL('GruvboxOrange', s:orange)
@@ -527,7 +532,7 @@ hi! link iCursor Cursor
 hi! link lCursor Cursor
 
 " }}}
-" Syntax Highlighting: {{{"{{{
+" Syntax Highlighting: {{{
 
 if g:gruvbox_improved_strings == 0
   hi! link Special GruvboxOrange
@@ -596,7 +601,7 @@ hi! link Structure GruvboxAqua
 " typedef
 hi! link Typedef GruvboxYellow
 
-" }}}"}}}
+" }}}
 " Completion Menu: {{{
 
 if version >= 700
@@ -742,12 +747,8 @@ hi! link SyntasticWarningSign GruvboxYellowSign
 
 " }}}
 " Signature: {{{
-
+hi! link SignatureMarkText   GruvboxBlueSign
 hi! link SignatureMarkerText GruvboxPurpleSign
-hi! link SignatureMarkText GruvboxBlueSign
-
-let g:SignatureMarkerTextHL='"SignatureMarkerText"'
-let g:SignatureMarkTextHL='"SignatureMarkText"'
 
 " }}}
 " ShowMarks: {{{
@@ -792,6 +793,14 @@ let g:vimshell_escape_colors = [
   \ s:bg0[0], s:red[0], s:green[0], s:orange[0],
   \ s:blue[0], s:purple[0], s:aqua[0], s:fg0[0]
   \ ]
+
+" }}}
+" BufTabLine: {{{
+
+call s:HL('BufTabLineCurrent', s:bg0, s:fg4)
+call s:HL('BufTabLineActive', s:fg4, s:bg2)
+call s:HL('BufTabLineHidden', s:bg4, s:bg1)
+call s:HL('BufTabLineFill', s:bg0, s:bg0)
 
 " }}}
 

@@ -25,8 +25,8 @@ export set PATH=$PATH:$HOME/bin
 source $HOME/.aliases
 
 #default editor
-export EDITOR=“nvim”
-export VISUAL="nvim"
+export EDITOR=nvim
+export VISUAL=nvim
 
 #options
 setopt CORRECT

@@ -3,5 +3,5 @@ alias sudo='sudo '
 
 #arch
 alias {pac,pacman}='pacaur'
-alias qqq='pacaur -Syua'
+alias qqq='pacaur -Syu'
 alias gmusicproxy="$HOME/.virtualenvs/gmusicproxy/bin/GMusicProxy"
