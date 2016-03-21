@@ -16,7 +16,6 @@
 * **budgie** *desktop environment*
 * **rxvt-unicode-24bit** *terminal emulator* with full color support
 * **zsh** *shell*
-  * **prezto** *zsh config framework*
 * **rofi** *launcher*
 * **nautilus** *file manager*
 * **gnu stow** *dotfiles/symlink manager*
@@ -47,3 +46,4 @@
 * **ricemyride** generates configs for Xresources, vim, etc.
 * **music** opens ncmpcpp and ncmpcpp visualizer in a tmux session
 * **spectrum** prints the color spectrum in a terminal supporting true color
+* **pass** lpass frontend for rofi/dmenu
