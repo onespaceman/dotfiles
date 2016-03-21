@@ -9,7 +9,7 @@ gitdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 sed -e "/#arch/q;p" $gitdir/shell/.aliases > $gitdir/osx/.aliases
 
 #edit .zshrc
-sed -e '/#virtualenvs/{N;N;d;}' $gitdir/shell/.zshrc > $gitdir/osx/.zshrc
+sed -e '/# virtualenvs/{N;N;d;}' -e 's/\[kcu/\[cu/g' $gitdir/shell/.zshrc > $gitdir/osx/.zshrc
 
 if [ "$(uname)" = "Linux" ]; then
     stow -v${@/-/} -d "$gitdir" -t "$HOME" -S ncmpcpp nvim bin shell tmux git
