@@ -6,7 +6,7 @@ gitdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 #edit files for osx
 #edit .aliases
-sed -e "/#arch/q;p" $gitdir/shell/.aliases > $gitdir/osx/.aliases
+sed -n "/#arch/q;p" $gitdir/shell/.aliases > $gitdir/osx/.aliases
 
 #edit .zshrc
 sed -e '/# virtualenvs/{N;N;d;}' -e 's/\[kcu/\[cu/g' $gitdir/shell/.zshrc > $gitdir/osx/.zshrc
