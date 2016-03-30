@@ -16,6 +16,7 @@ set smartindent
 
 " gui options
 set number " show line numbers
+set relativenumber " show relative line numbers
 set showcmd " show command in bottom bar
 set cursorline " highlight current line
 set lazyredraw " redraw only when we need to
@@ -39,7 +40,7 @@ set undolevels=1000
 set clipboard+=unnamedplus
 set hidden
 
-"splits and tabs
+" splits and tabs
 set splitbelow
 set splitright
 nnoremap <C-J> <C-W><C-J>
@@ -47,8 +48,13 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-
 " vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'bling/vim-airline'
@@ -58,6 +64,7 @@ Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'chrisbra/Colorizer'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 call plug#end()
 
@@ -76,3 +83,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" NERDTree
+let NERDTreeShowHidden = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeMouseMode = 2
+
