@@ -34,7 +34,7 @@
 #
 * **vim** *text editor*
   * **vim-plug** *plugin manager*
-  * **vim-airline** *status line*
+  * **lightline.vim** *status line*
   * **syntastic** *linter*
   * **supertab** *tab completion*
   * **gruvbox** *theme* used as base with customized colors
@@ -44,6 +44,4 @@
 ### scripts
 * **bootstrap** symlinks this repository into the appropriate locations using gnu stow. Also modifies certain files for use on OSX
 * **ricemyride** generates configs for Xresources, vim, etc.
-* **music** opens ncmpcpp and ncmpcpp visualizer in a tmux session
 * **spectrum** prints the color spectrum in a terminal supporting true color
-* **pass** lpass frontend for rofi/dmenu

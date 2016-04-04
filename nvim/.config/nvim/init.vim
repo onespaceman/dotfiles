@@ -1,10 +1,18 @@
 " theme
-let $NVIM_TUI_ENABLE_TRUE_COLOR=0
-colorscheme gruvbox
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+colorscheme custom
 set bg=dark
 
-" map space to leader
+" mappings
 map <Space> :
+cabbrev Wq wq
+cabbrev W w
+cabbrev Q q
+let mapleader = ","
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " tabs and spaces
 filetype indent on " load filetype-specific indent files
@@ -20,33 +28,34 @@ set relativenumber " show relative line numbers
 set showcmd " show command in bottom bar
 set cursorline " highlight current line
 set lazyredraw " redraw only when we need to
+set noshowmode " don't show mode below statusline
+set title " window title
+set titlestring=nvim\ %(\ %f\ %M%)
 
 " search
 set showmatch " highlight matching
 set ignorecase " match upper and lowercase in search
 
 " folds
-set foldenable " enable folding
 set foldlevelstart=10 " open most folds by default
 set foldnestmax=10  " 10 nested fold max
 set foldmethod=indent " fold based on indent level
 
 " extra
 set backup
-set backupdir=/tmp
+set backupdir=$XDG_DATA_HOME/nvim/backup,/tmp
 set undofile
-set undodir=~/.config/nvim/undo
-set undolevels=1000
 set clipboard+=unnamedplus
 set hidden
 
-" splits and tabs
+" splits
 set splitbelow
 set splitright
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+
+" improve startup time
+let g:python_host_skip_check= 1
+let g:loaded_python_provider = 1
+let g:loaded_python3_provider = 1
 
 " vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -57,35 +66,86 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic'
 Plug 'morhetz/gruvbox'
 Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'chrisbra/Colorizer'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 call plug#end()
 
-" airline
-let g:airline_theme = 'gruvbox'
-set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'right': [ [ 'syntastic', 'lineinfo' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&readonly?"\ue0a2":""}',
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+      \ }
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
 
 " syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+let g:syntastic_stl_format='err: %F (%t)'
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Better Buffer Navigation {{{
+" Maps <Tab> to cycle though buffers but only if they're modifiable.
+" If they're unmodifiable it maps <Tab> to cycle through splits.
 
-" NERDTree
-let NERDTreeShowHidden = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeMouseMode = 2
+function! BetterBufferNav(bcmd)
+	if &modifiable == 1 || &ft == 'help'
+		execute a:bcmd
+	else
+		wincmd w
+	endif
+endfunction
 
+" Maps Tab and Shift Tab to cycle through buffers
+nmap <silent> <Tab> :call BetterBufferNav("bn") <Cr>
+nmap <silent> <S-Tab> :call BetterBufferNav("bp") <Cr>
+
+" }}}
+
+" Quick Terminal {{{
+" Spawns a terminal in a small split for quick typing of commands
+" Also maps <Esc> to quit out of the terminal
+
+function QuitTerminal()
+	setlocal buflisted
+	silent! bd! quickterm
+	silent! bd! term://*//*/home/dyl/.fzf/bin/fzf*
+endfunction
+
+function! QuickTerminal()
+	10new
+	terminal
+	file quickterm
+endfunction
+
+tnoremap <silent> <Esc> <C-\><C-n>:call QuitTerminal()<CR>
+nnoremap <silent> <Leader>t :call QuickTerminal()<CR>
+
+" }}}

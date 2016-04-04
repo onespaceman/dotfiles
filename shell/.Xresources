@@ -3,46 +3,47 @@ URxvt.scrollBar: false
 URxvt.transparent:false
 URxvt.pointerBlink: true
 URxvt.geometry: 85x30
+URxvt.iso14755 : false
 
 URxvt.perl-ext-common: default,matcher
 URxvt.url-launcher: /usr/bin/google-chrome-beta
 URxvt.matcher.button: 1
 
-URxvt.font: xft:Roboto Mono:size=12,xft:Droid Sans Mono for Powerline:size=13
-URxvt.boldFont: xft:Roboto Mono:size=12,xft:Droid Sans Mono for Powerline:size=13
+URxvt.font: xft:Roboto Mono for Powerline:size=12,xft:Roboto Mono:size=12
+URxvt.boldFont: xft:Roboto Mono for Powerline:size=12,xft:Roboto Mono:size=12
 URxvt.letterspace: -5
 URxvt.linespace: -1
 
 URxvt.depth: 24
-URxvt*foreground: #c5c8c6
-URxvt*background: [100]#1d2021
-*foreground: #c5c8c6
-*background: #1d2021
+URxvt*foreground: #C5C8C6
+URxvt*background: [100]#1D2021
+*foreground: #C5C8C6
+*background: #1D2021
 
 ! Black + DarkGrey
-*color0: #1d2021
-*color8: #a5b6bc
+*color0: #1D2021
+*color8: #A5B6BC
 ! DarkRed + Red
-*color1: #a54242
-*color9: #cc6666
+*color1: #A54242
+*color9: #CC6666
 ! DarkGreen + Green
-*color2: #99cc99
-*color10: #aae3aa
+*color2: #99CC99
+*color10: #AAE3AA
 ! DarkYellow + Yellow
-*color3: #de935f
-*color11: #f0c674
+*color3: #DE935F
+*color11: #F0C674
 ! DarkBlue + Blue
-*color4: #5f819d
-*color12: #81a2be
+*color4: #5F819D
+*color12: #81A2BE
 ! DarkMagenta + Magenta
-*color5: #85678f
-*color13: #b294bb
+*color5: #85678F
+*color13: #B294BB
 ! DarkCyan + Cyan
-*color6: #5e8d87
-*color14: #8abeb7
+*color6: #5E8D87
+*color14: #8ABEB7
 ! LightGrey + White
-*color7: #5a6066
-*color15: #c5c8c6
+*color7: #5A6066
+*color15: #C5C8C6
 
 rofi.lines: 3
 rofi.font: Roboto 16
@@ -51,9 +52,9 @@ rofi.padding: 10
 rofi.location: 0
 rofi.yoffset: -200
 rofi.color-enabled: true
-rofi.color-window: #1d2021, #5f819d, #1d2021
-rofi.color-normal: #1d2021, #a5b6bc, #1d2021, #5f819d, #c5c8c6
-rofi.color-urgent: #1d2021, #a5b6bc, #1d2021, #5f819d, #c5c8c6
-rofi.color-active: #1d2021, #a5b6bc, #1d2021, #5f819d, #c5c8c6
+rofi.color-window: #1D2021, #5F819D, #1D2021
+rofi.color-normal: #1D2021, #A5B6BC, #1D2021, #5F819D, #C5C8C6
+rofi.color-urgent: #1D2021, #A5B6BC, #1D2021, #5F819D, #C5C8C6
+rofi.color-active: #1D2021, #A5B6BC, #1D2021, #5F819D, #C5C8C6
 rofi.terminal: urxvt
 rofi.levenshtein-sort: false

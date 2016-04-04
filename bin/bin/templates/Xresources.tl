@@ -3,13 +3,14 @@ URxvt.scrollBar: false
 URxvt.transparent:false
 URxvt.pointerBlink: true
 URxvt.geometry: 85x30
+URxvt.iso14755 : false
 
 URxvt.perl-ext-common: default,matcher
 URxvt.url-launcher: /usr/bin/google-chrome-beta
 URxvt.matcher.button: 1
 
-URxvt.font: xft:$font_mono:size=12,xft:Droid Sans Mono for Powerline:size=13
-URxvt.boldFont: xft:$font_mono_bold:size=12,xft:Droid Sans Mono for Powerline:size=13
+URxvt.font: xft:$font_mono for Powerline:size=12,xft:$font_mono:size=12
+URxvt.boldFont: xft:$font_mono_bold for Powerline:size=12,xft:$font_mono_bold:size=12
 URxvt.letterspace: -5
 URxvt.linespace: -1
 

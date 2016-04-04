@@ -1,9 +1,6 @@
 " -----------------------------------------------------------------------------
-" File: gruvbox.vim
-" Description: Retro groove color scheme for Vim
-" Author: morhetz <morhetz@gmail.com>
-" Source: https://github.com/morhetz/gruvbox
-" Last Modified: 04 Sep 2015
+" custom vim colorscheme
+" modified from gruvbox
 " -----------------------------------------------------------------------------
 
 " Supporting code -------------------------------------------------------------
@@ -16,7 +13,7 @@ if version > 580
   endif
 endif
 
-let g:colors_name='gruvbox'
+let g:colors_name='custom'
 
 if !has('gui_running') && &t_Co != 256
   finish
@@ -65,18 +62,6 @@ if !exists('g:gruvbox_invert_indent_guides')
   let g:gruvbox_invert_indent_guides=0
 endif
 
-if exists('g:gruvbox_contrast')
-  echo 'g:gruvbox_contrast is deprecated; use g:gruvbox_contrast_light and g:gruvbox_contrast_dark instead'
-endif
-
-if !exists('g:gruvbox_contrast_dark')
-  let g:gruvbox_contrast_dark='medium'
-endif
-
-if !exists('g:gruvbox_contrast_light')
-  let g:gruvbox_contrast_light='medium'
-endif
-
 let s:is_dark=(&background == 'dark')
 
 " }}}
@@ -86,50 +71,35 @@ let s:is_dark=(&background == 'dark')
 let s:gb = {}
 
 " fill it with absolute colors
-let s:gb.dark0_hard  = ['$background', $(hex_to_256 ${background//#/})]     " 29-32-33
-let s:gb.dark0       = ['$background', $(hex_to_256 ${background//#/})]     " 40-40-40
-let s:gb.dark0_soft  = ['$background', $(hex_to_256 ${background//#/})]     " 50-48-47
-let s:gb.dark1       = ['$dark1', $(hex_to_256 ${dark1//#/})]     " 60-56-54
-let s:gb.dark2       = ['$dark2', $(hex_to_256 ${dark2//#/})]     " 80-73-69
-let s:gb.dark3       = ['$dark3', $(hex_to_256 ${dark3//#/})]     " 102-92-84
-let s:gb.dark4       = ['$dark4', $(hex_to_256 ${dark4//#/})]     " 124-111-100
-let s:gb.dark4_256   = ['$dark4', $(hex_to_256 ${dark4//#/})]     " 124-111-100
+let s:gb.dark0       = ['$background', $(hex_to_256 ${background//#/})]
+let s:gb.dark1       = ['$dark1', $(hex_to_256 ${dark1//#/})]
+let s:gb.dark2       = ['$dark2', $(hex_to_256 ${dark2//#/})]
+let s:gb.dark3       = ['$dark3', $(hex_to_256 ${dark3//#/})]
+let s:gb.dark4       = ['$dark4', $(hex_to_256 ${dark4//#/})]
 
-let s:gb.gray_245    = ['$darkgrey', $(hex_to_256 ${darkgrey//#/})]     " 146-131-116
-let s:gb.gray_244    = ['$darkgrey', $(hex_to_256 ${darkgrey//#/})]     " 146-131-116
+let s:gb.gray        = ['$darkgrey', $(hex_to_256 ${darkgrey//#/})]
 
-let s:gb.light0_hard = ['$foreground', $(hex_to_256 ${foreground//#/})]     " 249-245-215
-let s:gb.light0      = ['$foreground', $(hex_to_256 ${foreground//#/})]     " 253-244-193
-let s:gb.light0_soft = ['$foreground', $(hex_to_256 ${foreground//#/})]     " 242-229-188
-let s:gb.light1      = ['$light1', $(hex_to_256 ${light1//#/})]     " 235-219-178
-let s:gb.light2      = ['$light2', $(hex_to_256 ${light2//#/})]     " 213-196-161
-let s:gb.light3      = ['$light3', $(hex_to_256 ${light3//#/})]     " 189-174-147
-let s:gb.light4      = ['$light4', $(hex_to_256 ${light4//#/})]     " 168-153-132
-let s:gb.light4_256  = ['$light4', $(hex_to_256 ${light4//#/})]     " 168-153-132
+let s:gb.light0      = ['$foreground', $(hex_to_256 ${foreground//#/})]
+let s:gb.light1      = ['$light1', $(hex_to_256 ${light1//#/})]
+let s:gb.light2      = ['$light2', $(hex_to_256 ${light2//#/})]
+let s:gb.light3      = ['$light3', $(hex_to_256 ${light3//#/})]
+let s:gb.light4      = ['$light4', $(hex_to_256 ${light4//#/})]
 
-let s:gb.bright_red     = ['$red', $(hex_to_256 ${red//#/})]     " 251-73-52
-let s:gb.bright_green   = ['$green', $(hex_to_256 ${green//#/})]     " 184-187-38
-let s:gb.bright_yellow  = ['$yellow', $(hex_to_256 ${yellow//#/})]     " 250-189-47
-let s:gb.bright_blue    = ['$blue', $(hex_to_256 ${blue//#/})]     " 131-165-152
-let s:gb.bright_purple  = ['$magenta', $(hex_to_256 ${magenta//#/})]     " 211-134-155
-let s:gb.bright_aqua    = ['$cyan', $(hex_to_256 ${cyan//#/})]     " 142-192-124
-let s:gb.bright_orange  = ['$orange', $(hex_to_256 ${orange//#/})]     " 254-128-25
+let s:gb.bright_red     = ['$red', $(hex_to_256 ${red//#/})]
+let s:gb.bright_green   = ['$green', $(hex_to_256 ${green//#/})]
+let s:gb.bright_yellow  = ['$yellow', $(hex_to_256 ${yellow//#/})]
+let s:gb.bright_blue    = ['$blue', $(hex_to_256 ${blue//#/})]
+let s:gb.bright_purple  = ['$magenta', $(hex_to_256 ${magenta//#/})]
+let s:gb.bright_aqua    = ['$cyan', $(hex_to_256 ${cyan//#/})]
+let s:gb.bright_orange  = ['$darkyellow', $(hex_to_256 ${darkyellow//#/})]
 
-let s:gb.neutral_red    = ['$darkred', $(hex_to_256 ${darkred//#/})]     " 204-36-29
-let s:gb.neutral_green  = ['$darkgreen', $(hex_to_256 ${darkgreen//#/})]     " 152-151-26
-let s:gb.neutral_yellow = ['$darkyellow', $(hex_to_256 ${darkyellow//#/})]     " 215-153-33
-let s:gb.neutral_blue   = ['$darkblue', $(hex_to_256 ${darkblue//#/})]      " 69-133-136
-let s:gb.neutral_purple = ['$darkmagenta', $(hex_to_256 ${darkmagenta//#/})]     " 177-98-134
-let s:gb.neutral_aqua   = ['$darkcyan', $(hex_to_256 ${darkcyan//#/})]      " 104-157-106
-let s:gb.neutral_orange = ['$orange', $(hex_to_256 ${orange//#/})]     " 214-93-14
-
-let s:gb.faded_red      = ['$darkred', $(hex_to_256 ${darkred//#/})]      " 157-0-6
-let s:gb.faded_green    = ['$darkgreen', $(hex_to_256 ${darkgreen//#/})]     " 121-116-14
-let s:gb.faded_yellow   = ['$darkyellow', $(hex_to_256 ${darkyellow//#/})]     " 181-118-20
-let s:gb.faded_blue     = ['$darkblue', $(hex_to_256 ${darkblue//#/})]      " 7-102-120
-let s:gb.faded_purple   = ['$darkmagenta', $(hex_to_256 ${darkmagenta//#/})]      " 143-63-113
-let s:gb.faded_aqua     = ['$darkcyan', $(hex_to_256 ${darkcyan//#/})]      " 66-123-88
-let s:gb.faded_orange   = ['$darkorange', $(hex_to_256 ${darkorange//#/})]     " 175-58-3
+let s:gb.faded_red      = ['$darkred', $(hex_to_256 ${darkred//#/})]
+let s:gb.faded_green    = ['$darkgreen', $(hex_to_256 ${darkgreen//#/})]
+let s:gb.faded_yellow   = ['$darkyellow', $(hex_to_256 ${darkyellow//#/})]
+let s:gb.faded_blue     = ['$darkblue', $(hex_to_256 ${darkblue//#/})]
+let s:gb.faded_purple   = ['$darkmagenta', $(hex_to_256 ${darkmagenta//#/})]
+let s:gb.faded_aqua     = ['$darkcyan', $(hex_to_256 ${darkcyan//#/})]
+let s:gb.faded_orange   = ['$darkyellow', $(hex_to_256 ${darkyellow//#/})]
 
 " }}}
 " Setup Emphasis: {{{
@@ -169,26 +139,19 @@ let s:none = ['NONE', 'NONE']
 " determine relative colors
 if s:is_dark
   let s:bg0  = s:gb.dark0
-  if g:gruvbox_contrast_dark == 'soft'
-    let s:bg0  = s:gb.dark0_soft
-  elseif g:gruvbox_contrast_dark == 'hard'
-    let s:bg0  = s:gb.dark0_hard
-  endif
 
   let s:bg1  = s:gb.dark1
   let s:bg2  = s:gb.dark2
   let s:bg3  = s:gb.dark3
   let s:bg4  = s:gb.dark4
 
-  let s:gray = s:gb.gray_245
+  let s:gray = s:gb.gray
 
   let s:fg0 = s:gb.light0
   let s:fg1 = s:gb.light1
   let s:fg2 = s:gb.light2
   let s:fg3 = s:gb.light3
   let s:fg4 = s:gb.light4
-
-  let s:fg4_256 = s:gb.light4_256
 
   let s:red    = s:gb.bright_red
   let s:green  = s:gb.bright_green
@@ -199,26 +162,19 @@ if s:is_dark
   let s:orange = s:gb.bright_orange
 else
   let s:bg0  = s:gb.light0
-  if g:gruvbox_contrast_light == 'soft'
-    let s:bg0  = s:gb.light0_soft
-  elseif g:gruvbox_contrast_light == 'hard'
-    let s:bg0  = s:gb.light0_hard
-  endif
 
   let s:bg1  = s:gb.light1
   let s:bg2  = s:gb.light2
   let s:bg3  = s:gb.light3
   let s:bg4  = s:gb.light4
 
-  let s:gray = s:gb.gray_244
+  let s:gray = s:gb.gray
 
   let s:fg0 = s:gb.dark0
   let s:fg1 = s:gb.dark1
   let s:fg2 = s:gb.dark2
   let s:fg3 = s:gb.dark3
   let s:fg4 = s:gb.dark4
-
-  let s:fg4_256 = s:gb.dark4_256
 
   let s:red    = s:gb.faded_red
   let s:green  = s:gb.faded_green
@@ -258,8 +214,6 @@ let s:gb.fg2 = s:fg2
 let s:gb.fg3 = s:fg3
 let s:gb.fg4 = s:fg4
 
-let s:gb.fg4_256 = s:fg4_256
-
 let s:gb.red    = s:red
 let s:gb.green  = s:green
 let s:gb.yellow = s:yellow
@@ -277,8 +231,8 @@ if exists('g:gruvbox_hls_cursor')
   let s:hls_cursor = get(s:gb, g:gruvbox_hls_cursor)
 endif
 
-let s:number_column = s:bg4
-let s:sign_column = s:bg1
+let s:number_column = s:bg1
+let s:sign_column = s:bg0
 
 if exists('g:gitgutter_override_sign_column_highlight') &&
       \ g:gitgutter_override_sign_column_highlight == 1
@@ -869,7 +823,7 @@ hi! link xmlEntityPunct GruvboxOrange
 " }}}
 " Vim: {{{
 
-call s:HL('vimCommentTitle', s:fg4_256, s:none, s:bold . s:italicize_comments)
+call s:HL('vimCommentTitle', s:fg4, s:none, s:bold . s:italicize_comments)
 
 hi! link vimNotation GruvboxOrange
 hi! link vimBracket GruvboxOrange

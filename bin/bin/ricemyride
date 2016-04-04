@@ -28,5 +28,5 @@ vim_template="$DIR/templates/vim.tl"
 
 eval "cat << EOF
 $(cat ${vim_template})
-EOF" > "$HOME/.config/nvim/colors/gruvbox.vim"
+EOF" > "$HOME/.config/nvim/colors/custom.vim"
 

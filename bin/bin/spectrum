@@ -7,7 +7,7 @@
 tt="▇"
 
 #fit to terminal width
-st=$(echo "255 / ( $(tput cols) / 6 )" | bc)
+st=$((255 / ( $(tput cols) / 6 )))
 
 #starting values
 r=255
