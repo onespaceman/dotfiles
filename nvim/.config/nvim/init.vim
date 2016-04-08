@@ -45,7 +45,6 @@ set foldmethod=indent " fold based on indent level
 set backup
 set backupdir=$XDG_DATA_HOME/nvim/backup,/tmp
 set undofile
-set clipboard+=unnamedplus
 set hidden
 
 " splits

@@ -14,3 +14,6 @@ elif [ "$(uname)" = "Darwin" ]; then
     bindkey "$terminfo[cuu1]" history-substring-search-up
     bindkey "$terminfo[cud1]" history-substring-search-down
 fi
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
