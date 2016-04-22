@@ -1,5 +1,6 @@
 " theme
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:gruvbox_italics=1
 colorscheme custom
 set bg=dark
 
@@ -52,9 +53,9 @@ set splitbelow
 set splitright
 
 " improve startup time
-let g:python_host_skip_check= 1
-let g:loaded_python_provider = 1
-let g:loaded_python3_provider = 1
+let g:python_host_skip_check=1
+let g:loaded_python_provider=1
+let g:loaded_python3_provider=1
 
 " vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -72,6 +73,7 @@ Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'chrisbra/Colorizer'
+Plug 'fatih/vim-go'
 
 call plug#end()
 

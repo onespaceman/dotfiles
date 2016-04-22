@@ -1,8 +1,8 @@
 URxvt.saveLines:3000
 URxvt.scrollBar: false
 URxvt.transparent:false
-URxvt.pointerBlink: true
 URxvt.geometry: 85x30
+URxvt.internalBorder: 10
 URxvt.iso14755 : false
 
 URxvt.perl-ext-common: default,matcher
@@ -10,9 +10,15 @@ URxvt.url-launcher: /usr/bin/google-chrome-beta
 URxvt.matcher.button: 1
 
 URxvt.font: xft:$font_mono for Powerline:size=12,xft:$font_mono:size=12
-URxvt.boldFont: xft:$font_mono_bold for Powerline:size=12,xft:$font_mono_bold:size=12
-URxvt.letterspace: -5
-URxvt.linespace: -1
+URxvt.boldFont: xft:$font_mono_bold for Powerline:bold:size=12,xft:$font_mono_bold:bold:size=12
+URxvt.italicFont: xft:$font_mono for Powerline:italic:size=12,xft:$font_mono:italic:size=12
+URxvt.bolditalicFont: xft:$font_mono for Powerline:bold:italic:size=12, xft:$font_mono:bold:italic:size=12
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgba
 
 URxvt.depth: 24
 URxvt*foreground: $foreground
