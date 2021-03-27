@@ -5,10 +5,6 @@
 alias vim='nvim'
 alias sudo='sudo '
 
-# arch
-alias {pac,pacman}='pacaur'
-alias qqq='pacaur -Syu'
-
 # ls
 if type dircolors >/dev/null 2>&1; then
   # GNU Core Utilities
