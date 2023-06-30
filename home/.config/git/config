@@ -36,3 +36,5 @@
     insteadOf = gh:
 [url "https://gist.github.com/"]
     insteadOf = gist:
+[submodule]
+    recurse = true
