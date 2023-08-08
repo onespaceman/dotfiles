@@ -7,7 +7,7 @@ local msg = require('mp.msg')
 local filename = nil
 
 --split path into directories
-function split(delim, str)
+local function split(delim, str)
 	local t = {}
 	for substr in string.gmatch(str, '[^'.. delim.. ']*') do
 		if substr ~= nil and string.len(substr) > 0 then
@@ -18,7 +18,7 @@ function split(delim, str)
 end
 
 --convert absolute path to relative path
-function relpath(path, pwd)
+local function relpath(path, pwd)
 	if path == pwd..'\\' then
 		return ''
 	end
