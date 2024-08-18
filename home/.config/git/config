@@ -5,9 +5,6 @@
     autocrlf = input
     safecrlf = true
     editor = nvim
-[credential]
-    helper = lastpass
-
 [color]
     ui = true
 [color "branch"]
@@ -25,15 +22,21 @@
     untracked = red
 [format]
     pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
-
+[fetch]
+    prune = true
+[init]
+    defaultBranch = main
+    
 [alias]
     s = status
     br = branch -av
     p = pull
     pu = push origin master
 
-[url "https://github.com/"]
+[url "ssh://git@github.com/"]
     insteadOf = gh:
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
 [url "https://gist.github.com/"]
     insteadOf = gist:
 [submodule]

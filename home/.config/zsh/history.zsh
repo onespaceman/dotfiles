@@ -2,7 +2,7 @@
 # history #
 ###########
 
-HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"
+HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -21,3 +21,5 @@ setopt HIST_BEEP                 # Beep when accessing non-existent history.
 
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
