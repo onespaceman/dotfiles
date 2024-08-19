@@ -18,6 +18,7 @@
     git
     home-manager
     neovim
+    tmux
     tree
     wget
     zsh
@@ -39,6 +40,13 @@
 
   environment.shells = [ pkgs.zsh ];
   users.defaultUserShell = pkgs.zsh;
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+    };
+  };
 
   # Automatic Garbage Collection
   nix.gc = {

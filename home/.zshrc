@@ -5,6 +5,7 @@
 #############
 
 for config (${XDG_CONFIG_HOME:-$HOME/.config}/zsh/*.zsh) source $config
+source $HOME/.local/bin
 
 ###############
 # environment #
