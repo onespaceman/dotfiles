@@ -1,26 +1,44 @@
-:root, menupopset, tooltip, panel {
+:root,
+menupopset,
+tooltip,
+panel {
   font-family: sans-serif !important;
   --toolbar-bgcolor: #1e1e1e !important;
   --space-medium: 2px !important;
 }
+
 #sidebar-box {
   min-width: 30px !important;
 }
+
 #pageAction-urlbar-_testpilot-containers {
-  display:none;
+  display: none;
 }
+
 :root[titlepreface*="🦊"] #urlbar-container {
-  margin-inline: 50px !important;
+  margin-inline: 4px !important;
 }
+
+/* New Sidebar */
 .wrapper {
   padding: 5px 3px 0 3px !important;
   min-width: 10px !important;
   -moz-window-dragging: drag;
   border-inline-end: unset !important;
 }
+
 .wrapper * {
   -moz-window-dragging: no-drag;
   padding-right: 0 !important;
+}
+
+/* Private Colors */
+:root {
+  &[privatebrowsingmode="temporary"] {
+    --toolbar-bgcolor: #9059FF22 !important;
+    --toolbox-non-lwt-bgcolor-inactive: #9059FF22 !important;
+    --toolbox-non-lwt-bgcolor: #9059FF22 !important;
+  }
 }
 
 /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/compact_extensions_panel.css made available under Mozilla Public License v. 2.0
@@ -28,26 +46,32 @@ See the above repository for updates as well as full license text. */
 
 /* This style hides some information from the extensions-button panel, but makes it appear more compact. Might be useful for someone having lot of extensions */
 
-#unified-extensions-view{
+#unified-extensions-view {
   --uei-icon-size: 16px;
 }
-.unified-extensions-item-menu-button.subviewbutton{
+
+.unified-extensions-item-menu-button.subviewbutton {
   padding: 0px !important;
   margin-inline-end: 0 !important;
 }
-.unified-extensions-item-action-button.subviewbutton{
+
+.unified-extensions-item-action-button.subviewbutton {
   padding-block: 6px !important;
 }
-.unified-extensions-item-menu-button.subviewbutton > .toolbarbutton-icon{
+
+.unified-extensions-item-menu-button.subviewbutton>.toolbarbutton-icon {
   padding: 4px !important;
 }
-.unified-extensions-item-message-deck{
+
+.unified-extensions-item-message-deck {
   display: none
 }
-#unified-extensions-view > vbox > vbox > .unified-extensions-item{
+
+#unified-extensions-view>vbox>vbox>.unified-extensions-item {
   padding-block: 0px !important;
 }
-#unified-extensions-panel .unified-extensions-item{
+
+#unified-extensions-panel .unified-extensions-item {
   margin-block: 0 !important;
 }
 
@@ -56,46 +80,59 @@ See the above repository for updates as well as full license text. */
 
 /* This requires Firefox 133+ to work */
 
-@media (-moz-bool-pref: "sidebar.verticalTabs"){
-  #sidebar-main{
+@media (-moz-bool-pref: "sidebar.verticalTabs"),
+-moz-pref("sidebar.verticalTabs") {
+  #sidebar-main {
     visibility: collapse;
   }
 }
-@media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"){
-  #nav-bar > .titlebar-buttonbox-container{
+
+@media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
+-moz-pref("userchrome.force-window-controls-on-left.enabled") {
+  #nav-bar>.titlebar-buttonbox-container {
     order: -1 !important;
-    > .titlebar-buttonbox{
+
+    >.titlebar-buttonbox {
       flex-direction: row-reverse;
     }
   }
 }
-@media not (-moz-bool-pref: "sidebar.verticalTabs"){
-  :root[titlepreface*="🦊"] #TabsToolbar{
+
+@media not (-moz-bool-pref: "sidebar.verticalTabs"),
+not -moz-pref("sidebar.verticalTabs") {
+  :root[titlepreface*="🦊"] #TabsToolbar:not([customizing]) {
     visibility: collapse;
   }
-  :root[sizemode="fullscreen"][titlepreface*="🦊"] #nav-bar > .titlebar-buttonbox-container{
+
+  :root[sizemode="fullscreen"] #nav-bar>.titlebar-buttonbox-container {
     display: flex !important;
   }
-  :root[tabsintitlebar][titlepreface*="🦊"] #toolbar-menubar:not([autohide="false"]) ~ #nav-bar{
-    > .titlebar-buttonbox-container{
+
+  :root[titlepreface*="🦊"]:is([tabsintitlebar], [customtitlebar]) #toolbar-menubar:not([autohide="false"])~#nav-bar {
+    >.titlebar-buttonbox-container {
       display: flex !important;
     }
-    :root[sizemode="normal"][titlepreface*="🦊"] & {
-      > .titlebar-spacer{
+
+    :root[sizemode="normal"] & {
+      >.titlebar-spacer {
         display: flex !important;
       }
     }
-    :root[sizemode="maximized"][titlepreface*="🦊"] & {
-      > .titlebar-spacer[type="post-tabs"]{
+
+    :root[sizemode="maximized"] & {
+      >.titlebar-spacer[type="post-tabs"] {
         display: flex !important;
       }
+
       @media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
-        (-moz-gtk-csd-reversed-placement),
-        (-moz-platform: macos){
-        > .titlebar-spacer[type="post-tabs"]{
+      -moz-pref("userchrome.force-window-controls-on-left.enabled"),
+      (-moz-gtk-csd-reversed-placement),
+      (-moz-platform: macos) {
+        >.titlebar-spacer[type="post-tabs"] {
           display: none !important;
         }
-        > .titlebar-spacer[type="pre-tabs"]{
+
+        >.titlebar-spacer[type="pre-tabs"] {
           display: flex !important;
         }
       }
