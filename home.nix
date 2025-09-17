@@ -43,7 +43,7 @@
     };
     zsh = {
       enable = true;
-      initExtra = builtins.readFile ./home/.zshrc;
+      initContent = builtins.readFile ./home/.zshrc;
       history = {
         path = "$HOME/.zhistory";
       };
