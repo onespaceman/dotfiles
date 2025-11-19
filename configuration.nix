@@ -13,11 +13,20 @@
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "24.05";
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:onespaceman/dotfiles;
+    flags = [
+      "--print-build-logs"
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+};
   environment.systemPackages = with pkgs; [
     curl
     git
     home-manager
-    neovim
+    helix
     tmux
     tree
     wget
