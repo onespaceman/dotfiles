@@ -29,7 +29,7 @@
     xz
   ];
 
-  environment.variables.EDITOR = "nvim";
+  environment.variables.EDITOR = "hx";
   programs = {
     zsh.enable =  true;
     nix-ld = {

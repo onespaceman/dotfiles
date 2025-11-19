@@ -15,19 +15,21 @@
   };
   programs = {
     home-manager.enable = true;
-    neovim = {
+    programs.helix = {
       enable = true;
-      extraLuaConfig =
-      ''
-      vim.opt.cursorline = true
-      vim.opt.number = true
-      vim.opt.relativenumber = true
-      vim.opt.expandtab = true
-      vim.opt.tabstop = 2
-      vim.opt.shiftwidth = 2
-      vim.opt.smartindent = true
-      vim.opt.termguicolors = true
-      '';
+      settings = {
+        theme = "catppuccin_mocha";
+        editor.cursor-shape = {
+          normal = "block";
+          insert = "bar";
+          select = "underline";
+        };
+      };
+      languages.language = [{
+        name = "nix";
+        auto-format = true;
+        formatter.command = lib.getExe pkgs.nixfmt-rfc-style;
+      }];
     };
     tmux = {
       enable = true;

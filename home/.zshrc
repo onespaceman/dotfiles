@@ -14,8 +14,8 @@ source $HOME/.local/bin
 export set PATH=$PATH:$HOME/bin
 
 # default editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=hx
+export VISUAL=hx
 
 # options
 setopt CORRECT

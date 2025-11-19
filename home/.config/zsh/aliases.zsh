@@ -2,7 +2,7 @@
 # aliases #
 ###########
 
-alias vim='nvim'
+alias vim='hx'
 alias sudo='sudo '
 
 # ls
