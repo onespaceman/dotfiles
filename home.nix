@@ -15,7 +15,7 @@
   };
   programs = {
     home-manager.enable = true;
-    programs.helix = {
+    helix = {
       enable = true;
       settings = {
         theme = "catppuccin_mocha";
