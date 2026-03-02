@@ -4,7 +4,6 @@
 [core]
     autocrlf = input
     safecrlf = true
-    editor = nvim
 [color]
     ui = true
 [color "branch"]
@@ -31,7 +30,7 @@
     s = status
     br = branch -av
     p = pull
-    pu = push origin master
+    pu = push origin main
 
 [url "ssh://git@github.com/"]
     insteadOf = gh:

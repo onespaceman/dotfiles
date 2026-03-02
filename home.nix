@@ -4,16 +4,15 @@
     stateVersion = "24.05";
     username = "spaceman";
     homeDirectory = "/home/spaceman";
-    packages = with pkgs; [
-      deno
-    ];
+    packages = with pkgs; [ ];
   };
   xdg.configFile."git/config".source = ./home/.config/git/config;
-  xdg.configFile."zsh" = {
-    source = ./home/.config/zsh;
+  xdg.configFile."nushell" = {
+    source = ./home/.config/nushell;
     recursive = true;
   };
   programs = {
+    direnv.enable = true;
     home-manager.enable = true;
     helix = {
       enable = true;
@@ -26,26 +25,8 @@
         };
       };
     };
-    tmux = {
+    nushell = {
       enable = true;
-      mouse = true;
-      prefix = "C-a";
-      extraConfig =
-        ''
-          bind \\ split-window -h
-          bind - split-window -v
-          unbind '"'
-          unbind %
-        '';
-    };
-    zsh = {
-      enable = true;
-      initContent = builtins.readFile ./home/.zshrc;
-      history = {
-        path = "$HOME/.zhistory";
-      };
-      historySubstringSearch.enable = true;
-      autosuggestion.enable = true;
     };
   };
 }

@@ -26,13 +26,13 @@
 
   environment.systemPackages = with pkgs; [
     curl
+    direnv
     git
     home-manager
     helix
     tmux
     tree
     wget
-    zsh
 
     # archives
     zip
@@ -41,12 +41,13 @@
   ];
 
   environment.variables.EDITOR = "hx";
-  programs = {
-    zsh.enable =  true;
-  };
 
-  environment.shells = [ pkgs.zsh ];
-  users.defaultUserShell = pkgs.zsh;
+  environment.shells = [ pkgs.nushell ];
+  programs.bash.interactiveShellInit = ''
+    if ! [ "$TERM" = "dumb" ] && [ -z "$BASH_EXECUTION_STRING" ]; then
+      exec nu
+    fi
+  '';
 
   services.openssh = {
     enable = true;
