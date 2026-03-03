@@ -10,20 +10,27 @@ alias ls = ls -a
 
 # PROMPT THEME
 def create_left_prompt [] {
-  let path = $env.PWD | str replace -r $"^($env.HOME)" "~"
-  let path_segment = if (is-admin) {
-    $"(ansi red_bold)($path)"
+  mut prompt = if (is-admin) {
+    (ansi red_bold)
   } else {
-    $"(ansi xterm_springgreen1)($path)"
+    (ansi xterm_springgreen1)
   }
 
-  let git_current_ref = (do { git rev-parse --abbrev-ref HEAD } | complete | get stdout | str trim)
-  let git_segment = if ($git_current_ref != "") {
-    $"(ansi reset) [(ansi yellow)($git_current_ref)(ansi reset)]" 
+  $prompt ++= ($env.PWD | str replace -r $"^($env.HOME)" "~")
+  let git_status = (git status -bs --porcelain=2 | complete | get stdout | str trim)
+  if ($git_status != "") {
+    $prompt ++= $" (ansi reset)["
+    $prompt ++= if ($git_status | str contains "\n?") {
+      $"(ansi red_bold)"
+    } else if ($git_status =~ '\n\d') {
+      $"(ansi yellow_bold)"
+    } else {
+      $"(ansi green_bold)"
+    }
+    $prompt ++= $"($git_status | parse -r '.*branch.head (.*)' | get capture0.0)(ansi reset)]"
   }
 
-  let prompt = ($"($path_segment)($git_segment)" | str trim)
-  $prompt
+  $prompt | str trim
 }
 $env.PROMPT_COMMAND = { create_left_prompt }
 $env.PROMPT_INDICATOR = $" (ansi cyan)» "
