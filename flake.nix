@@ -11,25 +11,21 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
-          system = "${system}";
-          modules = [
-            nixos-wsl.nixosModules.default
-	    ./configuration.nix
-	    home-manager.nixosModules.home-manager
-	    {
-	      home-manager.useGlobalPkgs = true;
-	      home-manager.useUserPackages = true;
-	      home-manager.users.spaceman = import ./home.nix;
-	    }
-          ];
-        };
+  outputs = inputs@{ self, nixpkgs, nixos-wsl, home-manager, ... }: {
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          nixos-wsl.nixosModules.default
+    	    ./configuration.nix
+    	    home-manager.nixosModules.home-manager
+    	    {
+    	      home-manager.useGlobalPkgs = true;
+    	      home-manager.useUserPackages = true;
+    	      home-manager.users.spaceman = ./home.nix;
+    	    }
+        ];
       };
     };
+  };
 }

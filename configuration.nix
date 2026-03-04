@@ -24,37 +24,31 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    curl
-    direnv
-    git
-    home-manager
-    helix
-    tmux
-    tree
-    wget
+  environment = {
+    systemPackages = with pkgs; [
+      curl
+      direnv
+      git
+      home-manager
+      helix
+      tmux
+      tree
+      wget
 
-    # archives
-    zip
-    unzip
-    xz
-  ];
+      # archives
+      zip
+      unzip
+      xz
+    ];
+    variables.EDITOR = "hx";
+    shells = [ pkgs.nushell ];
+  };
 
-  environment.variables.EDITOR = "hx";
-
-  environment.shells = [ pkgs.nushell ];
   programs.bash.interactiveShellInit = ''
     if ! [ "$TERM" = "dumb" ] && [ -z "$BASH_EXECUTION_STRING" ]; then
       exec nu
     fi
   '';
-
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-    };
-  };
 
   # Automatic Garbage Collection
   nix.gc = {
