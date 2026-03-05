@@ -7,12 +7,15 @@ panel {
   --space-medium: 2px !important;
 }
 
-#sidebar-box {
-  min-width: 30px !important;
+/* Private Colors */
+:root[privatebrowsingmode="temporary"] {
+  --toolbar-bgcolor: #25003e !important;
+  --toolbox-non-lwt-bgcolor-inactive: #25003e !important;
+  --toolbox-non-lwt-bgcolor: #25003e !important;
 }
 
-#pageAction-urlbar-_testpilot-containers {
-  display: none;
+#sidebar-box {
+  min-width: 30px !important;
 }
 
 :root[titlepreface*="🦊"] #urlbar-container {
@@ -20,25 +23,16 @@ panel {
 }
 
 /* New Sidebar */
-.wrapper {
-  padding: 5px 3px 0 3px !important;
-  min-width: 10px !important;
+#sidebar-main {
   -moz-window-dragging: drag;
-  border-inline-end: unset !important;
 }
 
-.wrapper * {
+.wrapper .buttons-wrapper > * {
   -moz-window-dragging: no-drag;
-  padding-right: 0 !important;
 }
 
-/* Private Colors */
-:root {
-  &[privatebrowsingmode="temporary"] {
-    --toolbar-bgcolor: #9059FF22 !important;
-    --toolbox-non-lwt-bgcolor-inactive: #9059FF22 !important;
-    --toolbox-non-lwt-bgcolor: #9059FF22 !important;
-  }
+#sidebar-panel-header {
+  display: none !important;
 }
 
 /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/compact_extensions_panel.css made available under Mozilla Public License v. 2.0
@@ -59,15 +53,15 @@ See the above repository for updates as well as full license text. */
   padding-block: 6px !important;
 }
 
-.unified-extensions-item-menu-button.subviewbutton>.toolbarbutton-icon {
+.unified-extensions-item-menu-button.subviewbutton > .toolbarbutton-icon {
   padding: 4px !important;
 }
 
 .unified-extensions-item-message-deck {
-  display: none
+  display: none;
 }
 
-#unified-extensions-view>vbox>vbox>.unified-extensions-item {
+#unified-extensions-view > vbox > vbox > .unified-extensions-item {
   padding-block: 0px !important;
 }
 
@@ -80,59 +74,57 @@ See the above repository for updates as well as full license text. */
 
 /* This requires Firefox 133+ to work */
 
-@media (-moz-bool-pref: "sidebar.verticalTabs"),
--moz-pref("sidebar.verticalTabs") {
+@media -moz-pref("sidebar.verticalTabs") {
   #sidebar-main {
     visibility: collapse;
   }
 }
 
-@media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
--moz-pref("userchrome.force-window-controls-on-left.enabled") {
-  #nav-bar>.titlebar-buttonbox-container {
+@media -moz-pref("userchrome.force-window-controls-on-left.enabled") {
+  #nav-bar > .titlebar-buttonbox-container {
     order: -1 !important;
 
-    >.titlebar-buttonbox {
+    > .titlebar-buttonbox {
       flex-direction: row-reverse;
     }
   }
 }
 
-@media not (-moz-bool-pref: "sidebar.verticalTabs"),
-not -moz-pref("sidebar.verticalTabs") {
+@media not -moz-pref("sidebar.verticalTabs") {
   :root[titlepreface*="🦊"] #TabsToolbar:not([customizing]) {
     visibility: collapse;
   }
 
-  :root[sizemode="fullscreen"] #nav-bar>.titlebar-buttonbox-container {
+  :root[sizemode="fullscreen"] #nav-bar > .titlebar-buttonbox-container {
     display: flex !important;
   }
 
-  :root[titlepreface*="🦊"]:is([tabsintitlebar], [customtitlebar]) #toolbar-menubar:not([autohide="false"])~#nav-bar {
-    >.titlebar-buttonbox-container {
+  :root[titlepreface*="🦊"][customtitlebar]
+    #toolbar-menubar:not([autohide="false"])
+    ~ #nav-bar {
+    > .titlebar-buttonbox-container {
       display: flex !important;
     }
 
     :root[sizemode="normal"] & {
-      >.titlebar-spacer {
+      > .titlebar-spacer {
         display: flex !important;
       }
     }
 
     :root[sizemode="maximized"] & {
-      >.titlebar-spacer[type="post-tabs"] {
+      > .titlebar-spacer[type="post-tabs"] {
         display: flex !important;
       }
 
-      @media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
-      -moz-pref("userchrome.force-window-controls-on-left.enabled"),
-      (-moz-gtk-csd-reversed-placement),
-      (-moz-platform: macos) {
-        >.titlebar-spacer[type="post-tabs"] {
+      @media -moz-pref("userchrome.force-window-controls-on-left.enabled"),
+        (-moz-gtk-csd-reversed-placement),
+        (-moz-platform: macos) {
+        > .titlebar-spacer[type="post-tabs"] {
           display: none !important;
         }
 
-        >.titlebar-spacer[type="pre-tabs"] {
+        > .titlebar-spacer[type="pre-tabs"] {
           display: flex !important;
         }
       }
