@@ -19,6 +19,7 @@
       source ${scripts}/custom-completions/nix/nix-completions.nu
       source ${scripts}/custom-completions/ssh/ssh-completions.nu
       source ${scripts}/custom-completions/docker/docker-completions.nu
+      source ${scripts}/themes/nu-themes/catppuccin-mocha.nu
     '';
   };
   programs = {

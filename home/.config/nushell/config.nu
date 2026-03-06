@@ -17,17 +17,20 @@ def create_left_prompt [] {
   }
 
   $prompt ++= ($env.PWD | str replace -r $"^($env.HOME)" "~")
-  let git_status = (git status -bs --porcelain=2 | complete | get stdout | str trim)
-  if ($git_status != "") {
+
+  let git_status = (git status -bs --porcelain=2 | complete | get stdout | str trim | lines)
+  if (($git_status | length) > 0) {
     $prompt ++= $" (ansi reset)["
-    $prompt ++= if ($git_status | str contains "\n?") {
-      $"(ansi red_bold)"
-    } else if ($git_status =~ '\n\d') {
-      $"(ansi yellow_bold)"
-    } else {
-      $"(ansi green_bold)"
+    $prompt ++= if (($git_status | parse -r '^\?' | length) > 0) {   # untracked files
+      (ansi red_bold)
+    } else if (($git_status| parse -r '^\d .[MD]' | length) > 0 ) { # unstaged changes
+      (ansi '#fab387')
+    } else if (($git_status| parse -r '^\d [MD]' | length) > 0 ) {   # staged changes
+      (ansi yellow_bold)
+    } else {                                                         # clear
+      (ansi green_bold)
     }
-    $prompt ++= $"($git_status | parse -r '.*branch.head (.*)' | get capture0.0)(ansi reset)]"
+    $prompt ++= $"($git_status | parse -r '^# branch\.head (.*)' | get capture0.0)(ansi reset)]"
   }
 
   $prompt | str trim
