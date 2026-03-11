@@ -1,17 +1,21 @@
 # NixOS for WSL2
-{ 
+{
   config,
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   wsl = {
     enable = true;
     defaultUser = "spaceman";
     wslConf.interop.appendWindowsPath = false;
   };
-  
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system = {
     stateVersion = "24.05";
     autoUpgrade = {

@@ -7,6 +7,7 @@ $env.COLORTERM = "truecolor"
 
 alias vim = hx
 alias ls = ls -a
+alias gs = git status
 
 # PROMPT THEME
 def create_left_prompt [] {
