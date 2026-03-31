@@ -1,4 +1,4 @@
-# NixOS for WSL2
+# Base config
 {
   config,
   lib,
@@ -6,27 +6,16 @@
   ...
 }:
 {
-  wsl = {
-    enable = true;
-    defaultUser = "spaceman";
-    wslConf.interop.appendWindowsPath = false;
-  };
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
   system = {
     stateVersion = "24.05";
-    autoUpgrade = {
-      enable = true;
-      flake = "github:onespaceman/dotfiles";
-      flags = [
-        "--print-build-logs"
-      ];
-      randomizedDelaySec = "45min";
-    };
   };
+
+  time.timeZone = "America/New_York";
 
   environment = {
     systemPackages = with pkgs; [

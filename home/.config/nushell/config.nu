@@ -14,7 +14,7 @@ def create_left_prompt [] {
   mut prompt = if (is-admin) {
     (ansi red_bold)
   } else {
-    (ansi xterm_springgreen1)
+    (ansi default)
   }
 
   $prompt ++= ($env.PWD | str replace -r $"^($env.HOME)" "~")
@@ -23,13 +23,13 @@ def create_left_prompt [] {
   if (($git_status | length) > 0) {
     $prompt ++= $" (ansi reset)["
     $prompt ++= if (($git_status | parse -r '^\?' | length) > 0) {   # untracked files
-      (ansi red_bold)
+      (ansi '#f38ba8')
     } else if (($git_status| parse -r '^\d .[MD]' | length) > 0 ) { # unstaged changes
       (ansi '#fab387')
     } else if (($git_status| parse -r '^\d [MD]' | length) > 0 ) {   # staged changes
-      (ansi yellow_bold)
+      (ansi '#f9e2af')
     } else {                                                         # clear
-      (ansi green_bold)
+      (ansi '#a6e3a1')
     }
     $prompt ++= $"($git_status | parse -r '^# branch\.head (.*)' | get capture0.0)(ansi reset)]"
   }
