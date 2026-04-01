@@ -7,6 +7,7 @@
       iosevka
       krita
       qview
+      transmission_4-qt6
     ];
   };
 
@@ -154,10 +155,11 @@
         cursor = {
           theme = "breeze_cursors";
           size = 30;
+          cursorFeedback = "none";
         };
         iconTheme = "Tela-dark";
         splashScreen.theme = "None";
-        theme = "Scratchy";
+        theme = "breeze-dark";
         windowDecorations = {
           library = "org.kde.kwin.aurorae.v2";
           theme = "__aurorae__svg__Scratchy";

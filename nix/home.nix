@@ -14,6 +14,11 @@
     "tmux/tmux.conf".source = ../home/.config/tmux/tmux.conf;
   };
   programs = {
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+      ignoreCase = true;
+    };
     direnv = {
       enable = true;
       enableNushellIntegration = true;
@@ -25,6 +30,7 @@
       settings = {
         theme = "puccin";
         editor = {
+          default-yank-register = "+";
           indent-guides.render = true;
           cursor-shape = {
             normal = "block";
@@ -46,12 +52,7 @@
           scripts = "${pkgs.nu_scripts}/share/nu_scripts";
         in
         ''
-          source ${scripts}/custom-completions/git/git-completions.nu
-          source ${scripts}/custom-completions/nix/nix-completions.nu
-          source ${scripts}/custom-completions/ssh/ssh-completions.nu
-          source ${scripts}/custom-completions/docker/docker-completions.nu
           source ${scripts}/themes/nu-themes/catppuccin-mocha.nu
-
           # theme overrides
           export-env {
             $env.config.color_config.background = "#191724"
