@@ -49,4 +49,11 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  # Home Manager
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.spaceman.imports = [ ./home.nix ];
+  };
 }

@@ -12,6 +12,10 @@
   xdg.configFile = {
     "git/config".source = ../home/.config/git/config;
     "tmux/tmux.conf".source = ../home/.config/tmux/tmux.conf;
+    "nushell/autoload/theme.nu".source = builtins.fetchurl {
+      url = "https://raw.githubusercontent.com/catppuccin/nushell/refs/heads/main/themes/catppuccin_mocha.nu";
+      sha256 = "8ba6876bc110418578c77b846d97af9b0b5e5d78f7fb81e25bc5b00db7324603";
+    };
   };
   programs = {
     carapace = {
@@ -47,18 +51,6 @@
     nushell = {
       enable = true;
       configFile.source = ../home/.config/nushell/config.nu;
-      extraConfig =
-        let
-          scripts = "${pkgs.nu_scripts}/share/nu_scripts";
-        in
-        ''
-          source ${scripts}/themes/nu-themes/catppuccin-mocha.nu
-          # theme overrides
-          export-env {
-            $env.config.color_config.background = "#191724"
-            ($"(ansi -o '11;')('#191724')(char bel)" | print -n $"($in)\r")
-          }
-        '';
     };
   };
 }

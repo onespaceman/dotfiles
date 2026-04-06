@@ -31,23 +31,19 @@
         ship = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./nix/base.nix
-            ./nix/ship
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
               home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
-              home-manager.users.spaceman.imports = [
-                ./nix/home.nix
-                ./nix/ship/home.nix
-              ];
+              home-manager.users.spaceman.imports = [ ./nix/ship/home.nix ];
             }
+            ./nix/base.nix
+            ./nix/ship
           ];
         };
         wsl = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            home-manager.nixosModules.home-manager
             nixos-wsl.nixosModules.default
             ./nix/base.nix
             {
@@ -57,14 +53,6 @@
                 wslConf.interop.appendWindowsPath = false;
               };
               networking.hostName = "wsl";
-            }
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.spaceman.imports = [
-                ./nix/home.nix
-              ];
             }
           ];
         };

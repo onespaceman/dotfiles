@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../modules/plasma
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -82,18 +83,7 @@
   hardware.nvidia.modesetting.enable = true;
 
   # GUI
-  services.xserver.enable = true;
-  services.displayManager.plasma-login-manager.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    discover
-    elisa
-    gwenview
-    kate
-    khelpcenter
-    konsole
-    plasma-browser-integration
-  ];
+  # Software
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services.flatpak.enable = true;
   services.packagekit.enable = true;
