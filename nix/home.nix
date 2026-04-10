@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   home = {
     stateVersion = "26.05";
@@ -34,23 +39,43 @@
       settings = {
         theme = "puccin";
         editor = {
-          default-yank-register = "+";
-          indent-guides.render = true;
+          bufferline = "multiple";
           cursor-shape = {
-            normal = "block";
             insert = "bar";
+            normal = "block";
             select = "underline";
           };
+          default-yank-register = "+";
+          indent-guides.render = true;
+          line-number = "relative";
+          # lsp settings
+          end-of-line-diagnostics = "hint";
+          inline-diagnostics = {
+            cursor-line = "error";
+            other-lines = "disable";
+          };
+        };
+        keys.normal = {
+          "X" = "select_line_above";
         };
       };
       themes.puccin = {
         inherits = "catppuccin_mocha";
         palette.base = "#191724";
+        "warning" = {
+          fg = "yellow";
+          modifiers = [ "dim" ];
+        };
+        "error" = {
+          fg = "red";
+          modifiers = [ "dim" ];
+        };
       };
     };
     nushell = {
       enable = true;
       configFile.source = ../home/.config/nushell/config.nu;
+      environmentVariables.LS_COLORS = lib.hm.nushell.mkNushellInline "${pkgs.vivid}/bin/vivid generate catppuccin-mocha";
     };
   };
 }

@@ -29,10 +29,10 @@
     ];
     plymouth = {
       enable = true;
-      theme = "spinner_alt";
+      theme = "circle_alt";
       themePackages = with pkgs; [
         (adi1090x-plymouth-themes.override {
-          selected_themes = [ "spinner_alt" ];
+          selected_themes = [ "circle_alt" ];
         })
       ];
     };
@@ -114,28 +114,28 @@
 
   # Remote
   environment.systemPackages = [ pkgs.rustdesk-flutter ];
-  systemd.services.rustdesk = {
-    enable = true;
-    description = "RustDesk";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "systemd-user-sessions.service" ];
-    requires = [ "network.target" ];
-    script = ''
-      export PATH=/run/wrappers/bin:$PATH
-      ${pkgs.rustdesk-flutter.outPath}/bin/rustdesk --service
-    '';
-    serviceConfig = {
-      Type = "simple";
-      ExecStop = "${pkgs.procps.outPath}/bin/pkill -f \"rustdesk --\"";
-      PIDFile = "/run/rustdesk.pid";
-      KillMode = "mixed";
-      TimeoutStopSec = 30;
-      User = "root";
-      LimitNOFILE = 100000;
-      Environment = [
-        "PULSE_LATENCY_MSEC=60"
-        "PIPEWIRE_LATENCY=1024/48000"
-      ];
-    };
-  };
+  # systemd.services.rustdesk = {
+  #   enable = true;
+  #   description = "RustDesk";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [ "systemd-user-sessions.service" ];
+  #   requires = [ "network.target" ];
+  #   script = ''
+  #     export PATH=/run/wrappers/bin:$PATH
+  #     ${pkgs.rustdesk-flutter.outPath}/bin/rustdesk --service
+  #   '';
+  #   serviceConfig = {
+  #     Type = "simple";
+  #     ExecStop = "${pkgs.procps.outPath}/bin/pkill -f \"rustdesk --\"";
+  #     PIDFile = "/run/rustdesk.pid";
+  #     KillMode = "mixed";
+  #     TimeoutStopSec = 30;
+  #     User = "root";
+  #     LimitNOFILE = 100000;
+  #     Environment = [
+  #       "PULSE_LATENCY_MSEC=60"
+  #       "PIPEWIRE_LATENCY=1024/48000"
+  #     ];
+  #   };
+  # };
 }

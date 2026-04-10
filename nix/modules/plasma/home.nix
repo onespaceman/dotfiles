@@ -42,6 +42,7 @@
         position = "center";
         shortcuts.launch = "Meta";
       };
+      kscreenlocker.timeout = 30;
       kwin = {
         cornerBarrier = false;
         edgeBarrier = 0;
@@ -132,7 +133,7 @@
           size = 30;
           cursorFeedback = "None";
         };
-        iconTheme = "Klassy";
+        iconTheme = "klassy-dark";
         splashScreen.theme = "None";
         theme = "default";
         windowDecorations = {

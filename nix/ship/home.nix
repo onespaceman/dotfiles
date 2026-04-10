@@ -22,6 +22,15 @@
         recursive = true;
       };
     };
+    userDirs = {
+      enable = true;
+      desktop = "${config.home.homeDirectory}/desk";
+      documents = "${config.home.homeDirectory}/doc";
+      download = "${config.home.homeDirectory}/dl";
+      music = "${config.home.homeDirectory}/mus";
+      pictures = "${config.home.homeDirectory}/pic";
+      videos = "${config.home.homeDirectory}/vid";
+    };
   };
 
   fonts.fontconfig.enable = true;
@@ -50,6 +59,7 @@
       profiles.default = {
         userChrome = builtins.readFile ../../userChrome.css;
         containers = { };
+        containersForce = true;
         search = {
           force = true;
           default = "dgg";
