@@ -87,6 +87,15 @@
         };
         colors-dark = {
           background = "191724";
+          foreground = "cdd6f4";
+          regular0 = "45475a"; # black
+          regular1 = "f38ba8"; # red
+          regular2 = "a6e3a1"; # green
+          regular3 = "f9e2af"; # yellow
+          regular4 = "89b4fa"; # blue
+          regular5 = "cba6f7"; # magenta
+          regular6 = "94e2d5"; # cyan
+          regular7 = "bac2de"; # white
         };
       };
     };
@@ -107,6 +116,7 @@
         minimizeToTray = true;
         notifyAboutUpdates = true;
         plugins = {
+          AlwaysTrust.enabled = true;
           ClearURLs.enabled = true;
           FixYoutubeEmbeds.enabled = true;
         };

@@ -6,13 +6,20 @@
   ...
 }:
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix = {
+    extraOptions = ''warn-dirty = false'';
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
   system = {
     stateVersion = "24.05";
+    activationScripts.diff = {
+      supportsDryActivation = true;
+      text = ''${lib.getExe pkgs.nvd} --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"'';
+    };
   };
 
   time.timeZone = "America/New_York";
@@ -42,6 +49,17 @@
       exec nu
     fi
   '';
+
+  # Users
+  users.users.spaceman = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "storage"
+    ];
+    hashedPassword = "$y$j9T$.oBXCoD8or9FJNQLQxAVU/$oe0TW9EJWgMRLsFmh7GQXkVBQdF4Ll6QsLnp/dnPjk6";
+  };
 
   # Automatic Garbage Collection
   nix.gc = {

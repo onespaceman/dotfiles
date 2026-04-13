@@ -79,11 +79,17 @@
             }
             "org.kde.plasma.panelspacer"
             {
-              kickoff = {
-                sortAlphabetically = true;
-                compactDisplayStyle = true;
-                showActionButtonCaptions = false;
-                settings.switchCategoryOnHover = true;
+              kicker = {
+                behavior = {
+                  sortAlphabetically = true;
+                  flattenCategories = true;
+                };
+                categories = {
+                  show = {
+                    recentApplications = false;
+                    recentFiles = false;
+                  };
+                };
               };
             }
             {

@@ -23,20 +23,21 @@ def create_left_prompt [] {
   if (($git_status | length) > 0) {
     $prompt ++= $" (ansi reset)["
     $prompt ++= if (($git_status | parse -r '^\?' | length) > 0) {   # untracked files
-      (ansi '#f38ba8')
+      (ansi red)
     } else if (($git_status| parse -r '^\d .[MD]' | length) > 0 ) { # unstaged changes
-      (ansi '#fab387')
+      (ansi purple)
     } else if (($git_status| parse -r '^\d [MD]' | length) > 0 ) {   # staged changes
-      (ansi '#f9e2af')
+      (ansi yellow)
     } else {                                                         # clear
-      (ansi '#a6e3a1')
+      (ansi green)
     }
     $prompt ++= $"($git_status | parse -r '^# branch\.head (.*)' | get capture0.0)(ansi reset)]"
   }
 
-  $prompt | str trim
+  $prompt ++= " "
+  $prompt
 }
 $env.PROMPT_COMMAND = { create_left_prompt }
-$env.PROMPT_INDICATOR = $" (ansi cyan)» "
+$env.PROMPT_INDICATOR = $"(ansi cyan)» "
 $env.PROMPT_COMMAND_RIGHT = ""
 

@@ -15,7 +15,7 @@
     ];
   };
   xdg.configFile = {
-    "git/config".source = ../home/.config/git/config;
+    "git".source = ../home/.config/git;
     "tmux/tmux.conf".source = ../home/.config/tmux/tmux.conf;
     "nushell/autoload/theme.nu".source = builtins.fetchurl {
       url = "https://raw.githubusercontent.com/catppuccin/nushell/refs/heads/main/themes/catppuccin_mocha.nu";
@@ -57,6 +57,7 @@
         };
         keys.normal = {
           "X" = "select_line_above";
+          "C-w" = ":buffer-close";
         };
       };
       themes.puccin = {

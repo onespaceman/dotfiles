@@ -65,17 +65,6 @@
   # Keyboard layout
   services.xserver.xkb.layout = "us";
 
-  # Users
-  users.users.spaceman = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "storage"
-    ];
-    hashedPassword = "$y$j9T$.oBXCoD8or9FJNQLQxAVU/$oe0TW9EJWgMRLsFmh7GQXkVBQdF4Ll6QsLnp/dnPjk6";
-  };
-
   # Graphics
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
