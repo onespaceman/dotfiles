@@ -14,8 +14,19 @@ panel {
   --toolbox-non-lwt-bgcolor: #25003e !important;
 }
 
-#sidebar-box {
-  min-width: 30px !important;
+/* Window borders */
+@media (-moz-platform: linux) {
+  :root > body {
+    box-sizing: border-box;
+    border-color: var(--toolbox-bgcolor-inactive);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+  }
+
+  :root:not(:-moz-window-inactive) > body {
+    border-color: AccentColor;
+  }
 }
 
 :root[titlepreface*="🦊"] #urlbar-container {
@@ -25,6 +36,10 @@ panel {
 /* New Sidebar */
 #sidebar-main {
   -moz-window-dragging: drag;
+}
+
+#sidebar-box {
+  min-width: 30px !important;
 }
 
 .wrapper .buttons-wrapper > * {

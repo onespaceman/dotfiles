@@ -67,6 +67,7 @@
         };
         settings = {
           toolkit.legacyUserProfileCustomizations.stylesheets = true;
+          browser.fixup.dns_first_for_single_words = true;
           browser.ml.linkPreview.enabled = false;
         };
       };

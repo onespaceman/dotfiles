@@ -6,6 +6,8 @@
   ...
 }:
 {
+  imports = [ ./secrets/mysecrets.nix ]; 
+  nixpkgs.config.allowUnfree = true;
   nix = {
     extraOptions = ''warn-dirty = false'';
     settings.experimental-features = [
@@ -31,6 +33,7 @@
       git
       home-manager
       helix
+      htop
       tmux
       tree
       wget
@@ -54,10 +57,12 @@
   users.users.spaceman = {
     isNormalUser = true;
     extraGroups = [
-      "wheel"
+      "docker"
       "networkmanager"
       "storage"
+      "wheel"
     ];
+    createHome = true;
     hashedPassword = "$y$j9T$.oBXCoD8or9FJNQLQxAVU/$oe0TW9EJWgMRLsFmh7GQXkVBQdF4Ll6QsLnp/dnPjk6";
   };
 

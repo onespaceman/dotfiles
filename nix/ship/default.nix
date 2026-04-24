@@ -70,12 +70,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
   hardware.nvidia.modesetting.enable = true;
-
-  # GUI
-  # Software
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  services.flatpak.enable = true;
-  services.packagekit.enable = true;
 
   # Audio
   # rtkit (optional, recommended) allows Pipewire to use the realtime scheduler for increased performance.
