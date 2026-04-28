@@ -7,8 +7,9 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./docker.nix
+    ./docker
     ./samba.nix
+    ./ups.nix
   ];
 
   # Boot
@@ -21,14 +22,22 @@
     supportedFilesystems = [ "zfs" ];
     zfs.extraPools = [
       "data1"
+      "data2"
       "data3"
+      "seagatemirror"
     ];
   };
+
+  powerManagement.cpuFreqGovernor = "ondemand";
+  services.smartd.enable = true;
 
   # Filesystems
   fileSystems = {
     "/".options = [ "compress=zstd" ];
-    "/home".options = [ "compress=zstd" ];
+    "/home" = {
+      neededForBoot = true;
+      options = [ "compress=zstd" ];
+    };
     "/nix".options = [
       "compress=zstd"
       "noatime"
@@ -63,7 +72,7 @@
     firewall = {
       enable = true;
       allowPing = true;
-      extraCommands = "iptables -I nixos-fw 1 -i br+ -j ACCEPT";
+      extraCommands = "iptables -I nixos-fw 1 -i br+ -j ACCEPT"; # allow docker networks
     };
     hostId = "1e1e1e1e";
     hostName = "mothership";
@@ -81,62 +90,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
-
-  # Power
-  powerManagement.cpuFreqGovernor = "ondemand";
-
-  # Spin down drives
-  services.udev.extraRules =
-    let
-      mkRule = as: lib.concatStringsSep ", " as;
-      mkRules = rs: lib.concatStringsSep "\n" rs;
-    in
-    mkRules ([
-      (mkRule [
-        ''ACTION=="add|change"''
-        ''SUBSYSTEM=="block"''
-        ''KERNEL=="sd[a-z]"''
-        ''ATTR{queue/rotational}=="1"''
-        ''RUN+="${pkgs.hdparm}/bin/hdparm -B 90 -S 61 /dev/%k"''
-      ])
-    ]);
-
-  power.ups = {
-    enable = true;
-    mode = "standalone";
-    ups."apc" = {
-      driver = "usbhid-ups";
-      port = "auto";
-      directives = [
-        "offdelay = 60"
-        "ondelay = 70"
-        "lowbatt = 40"
-        "ignorelb"
-      ];
-    };
-    upsd.listen = [
-      {
-        address = "127.0.0.1";
-        port = 3493;
-      }
-    ];
-    users."admin" = {
-      passwordFile = config.age.secrets.ups.path;
-      upsmon = "primary";
-    };
-    upsmon = {
-      monitor."apc" = {
-        system = "apc@localhost";
-        powerValue = 1;
-        user = "admin";
-        passwordFile = config.age.secrets.ups.path;
-        type = "primary";
-      };
-      settings = {
-
-      };
-    };
   };
 
   # Services

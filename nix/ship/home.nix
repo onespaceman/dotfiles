@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  imports = [ ../modules/plasma/home.nix ];
+  imports = [ ./plasma/home.nix ];
 
   home = {
     packages = with pkgs; [

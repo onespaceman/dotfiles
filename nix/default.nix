@@ -6,10 +6,9 @@
   ...
 }:
 {
-  imports = [ ./secrets/mysecrets.nix ]; 
   nixpkgs.config.allowUnfree = true;
   nix = {
-    extraOptions = ''warn-dirty = false'';
+    extraOptions = "warn-dirty = false";
     settings.experimental-features = [
       "nix-command"
       "flakes"
@@ -53,7 +52,7 @@
     fi
   '';
 
-  # Users
+  # users
   users.users.spaceman = {
     isNormalUser = true;
     extraGroups = [
@@ -66,17 +65,20 @@
     hashedPassword = "$y$j9T$.oBXCoD8or9FJNQLQxAVU/$oe0TW9EJWgMRLsFmh7GQXkVBQdF4Ll6QsLnp/dnPjk6";
   };
 
-  # Automatic Garbage Collection
+  # automatic garbage collection
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
 
-  # Home Manager
+  # home manager
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     users.spaceman.imports = [ ./home.nix ];
   };
+
+  # agenix secrets
+  age.identityPaths = [ "${config.users.users.spaceman.home}/.ssh//id_ed25519" ];
 }

@@ -55,9 +55,14 @@
             other-lines = "disable";
           };
         };
-        keys.normal = {
-          "X" = "select_line_above";
-          "C-w" = ":buffer-close";
+        keys = {
+          insert = {
+            "C-space" = "completion";
+          };
+          normal = {
+            "X" = "select_line_above";
+            "C-w" = ":buffer-close";
+          };
         };
       };
       themes.puccin = {

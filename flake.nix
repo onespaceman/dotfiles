@@ -41,7 +41,7 @@
                 users.spaceman.imports = [ ./nix/mothership/home.nix ];
               };
             }
-            ./nix/base.nix
+            ./nix
             ./nix/mothership
           ];
         };
@@ -56,7 +56,7 @@
                 users.spaceman.imports = [ ./nix/ship/home.nix ];
               };
             }
-            ./nix/base.nix
+            ./nix
             ./nix/ship
           ];
         };

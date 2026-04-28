@@ -7,7 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../modules/plasma
+    ./plasma
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -49,7 +49,10 @@
   # Filesystems
   fileSystems = {
     "/".options = [ "compress=zstd" ];
-    "/home".options = [ "compress=zstd" ];
+    "/home" = {
+      neededForBoot = true;
+      options = [ "compress=zstd" ];
+    };
     "/nix".options = [
       "compress=zstd"
       "noatime"
