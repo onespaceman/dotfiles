@@ -1,10 +1,9 @@
-{ ... }:
-{
+{...}: {
   virtualisation.oci-containers.containers.jellyfin = {
     image = "lscr.io/linuxserver/jellyfin";
     hostname = "jellyfin";
     autoStart = true;
-    networks = [ "pub" ];
+    networks = ["pub"];
     ports = [
       "50500:8096"
       "50501:8920"
@@ -16,7 +15,7 @@
       "/mnt/1/mov/tv/:/data/tvshows"
       "/mnt/1/mov/movies/:/data/movies"
     ];
-    devices = [ "/dev/dri:/dev/dri" ];
+    devices = ["/dev/dri:/dev/dri"];
     environment = {
       PUID = "1000";
       PGID = "100";

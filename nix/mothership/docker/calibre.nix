@@ -1,14 +1,13 @@
-{ ... }:
-{
+{...}: {
   virtualisation.oci-containers.containers.calibre-web = {
     image = "crocodilestick/calibre-web-automated:latest";
     hostname = "calibre";
     autoStart = true;
-    networks = [ "pub" ];
-    ports = [ "50005:8083/tcp" ];
+    networks = ["pub"];
+    ports = ["50005:8083/tcp"];
     volumes = [
       "/docker/calibre-web:/config"
-      "/mnt/3/book:/calibre-web"
+      "/mnt/3/book:/calibre-library"
     ];
     environment = {
       PUID = "1000";

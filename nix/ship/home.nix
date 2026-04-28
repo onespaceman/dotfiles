@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
 {
-  imports = [ ./plasma/home.nix ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [./plasma/home.nix];
 
   home = {
     packages = with pkgs; [
@@ -58,7 +61,7 @@
       };
       profiles.default = {
         userChrome = builtins.readFile ../../userChrome.css;
-        containers = { };
+        containers = {};
         containersForce = true;
         search = {
           force = true;
@@ -129,5 +132,4 @@
       enable = true;
     };
   };
-
 }

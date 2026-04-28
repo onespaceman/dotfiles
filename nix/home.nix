@@ -1,17 +1,17 @@
 {
-  config,
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   home = {
     stateVersion = "26.05";
     username = "spaceman";
     homeDirectory = "/home/spaceman";
     packages = with pkgs; [
-      nil # nix LSP
+      nixd # nix LSP
       bash-language-server
+      vscode-json-languageserver
+      yaml-language-server
     ];
   };
   xdg.configFile = {
@@ -65,16 +65,23 @@
           };
         };
       };
+      languages.language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = lib.getExe pkgs.alejandra;
+        }
+      ];
       themes.puccin = {
         inherits = "catppuccin_mocha";
         palette.base = "#191724";
         "warning" = {
           fg = "yellow";
-          modifiers = [ "dim" ];
+          modifiers = ["dim"];
         };
         "error" = {
           fg = "red";
-          modifiers = [ "dim" ];
+          modifiers = ["dim"];
         };
       };
     };

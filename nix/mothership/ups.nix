@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   age.secrets.ups.file = ../secrets/ups.age;
 
   power.ups = {

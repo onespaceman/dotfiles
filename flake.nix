@@ -18,65 +18,63 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      nixos-wsl,
-      agenix,
-      home-manager,
-      plasma-manager,
-      ...
-    }:
-    {
-      nixosConfigurations = {
-        mothership = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            agenix.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = [ agenix.homeManagerModules.default ];
-                users.spaceman.imports = [ ./nix/mothership/home.nix ];
-              };
-            }
-            ./nix
-            ./nix/mothership
-          ];
-        };
-        ship = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            agenix.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = [ plasma-manager.homeModules.plasma-manager ];
-                users.spaceman.imports = [ ./nix/ship/home.nix ];
-              };
-            }
-            ./nix
-            ./nix/ship
-          ];
-        };
-        wsl = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            agenix.nixosModules.default
-            home-manager.nixosModules.home-manager
-            nixos-wsl.nixosModules.default
-            ./nix/base.nix
-            {
-              wsl = {
-                enable = true;
-                defaultUser = "spaceman";
-                wslConf.interop.appendWindowsPath = false;
-              };
-              networking.hostName = "wsl";
-            }
-          ];
-        };
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixos-wsl,
+    agenix,
+    home-manager,
+    plasma-manager,
+    ...
+  }: {
+    nixosConfigurations = {
+      mothership = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          agenix.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              sharedModules = [agenix.homeManagerModules.default];
+              users.spaceman.imports = [./nix/mothership/home.nix];
+            };
+          }
+          ./nix
+          ./nix/mothership
+        ];
+      };
+      ship = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          agenix.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              sharedModules = [plasma-manager.homeModules.plasma-manager];
+              users.spaceman.imports = [./nix/ship/home.nix];
+            };
+          }
+          ./nix
+          ./nix/ship
+        ];
+      };
+      wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          agenix.nixosModules.default
+          home-manager.nixosModules.home-manager
+          nixos-wsl.nixosModules.default
+          ./nix/base.nix
+          {
+            wsl = {
+              enable = true;
+              defaultUser = "spaceman";
+              wslConf.interop.appendWindowsPath = false;
+            };
+            networking.hostName = "wsl";
+          }
+        ];
       };
     };
+  };
 }

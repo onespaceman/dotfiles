@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = [
     pkgs.klassy
   ];
@@ -48,7 +51,7 @@
         edgeBarrier = 0;
         effects.shakeCursor.enable = false;
         titlebarButtons = {
-          left = [ ];
+          left = [];
           right = [
             "help"
             "minimize"

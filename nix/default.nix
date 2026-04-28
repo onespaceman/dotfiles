@@ -4,8 +4,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   nixpkgs.config.allowUnfree = true;
   nix = {
     extraOptions = "warn-dirty = false";
@@ -43,7 +42,7 @@
       xz
     ];
     variables.EDITOR = "hx";
-    shells = [ pkgs.nushell ];
+    shells = [pkgs.nushell];
   };
 
   programs.bash.interactiveShellInit = ''
@@ -76,9 +75,9 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.spaceman.imports = [ ./home.nix ];
+    users.spaceman.imports = [./home.nix];
   };
 
   # agenix secrets
-  age.identityPaths = [ "${config.users.users.spaceman.home}/.ssh//id_ed25519" ];
+  age.identityPaths = ["${config.users.users.spaceman.home}/.ssh//id_ed25519"];
 }

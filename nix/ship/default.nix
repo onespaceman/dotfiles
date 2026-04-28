@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./plasma
@@ -32,7 +26,7 @@
       theme = "circle_alt";
       themePackages = with pkgs; [
         (adi1090x-plymouth-themes.override {
-          selected_themes = [ "circle_alt" ];
+          selected_themes = ["circle_alt"];
         })
       ];
     };
@@ -42,16 +36,16 @@
     {
       device = "/swap/swapfile";
       size = 32 * 1024; # 16GB
-      options = [ "discard" ];
+      options = ["discard"];
     }
   ];
 
   # Filesystems
   fileSystems = {
-    "/".options = [ "compress=zstd" ];
+    "/".options = ["compress=zstd"];
     "/home" = {
       neededForBoot = true;
-      options = [ "compress=zstd" ];
+      options = ["compress=zstd"];
     };
     "/nix".options = [
       "compress=zstd"
@@ -62,7 +56,7 @@
   services.btrfs.autoScrub = {
     enable = true;
     interval = "monthly";
-    fileSystems = [ "/" ];
+    fileSystems = ["/"];
   };
 
   # Keyboard layout
@@ -70,7 +64,7 @@
 
   # Graphics
   hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.open = true;
   hardware.nvidia.modesetting.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -100,7 +94,7 @@
   };
 
   # Remote
-  environment.systemPackages = [ pkgs.rustdesk-flutter ];
+  environment.systemPackages = [pkgs.rustdesk-flutter];
   # systemd.services.rustdesk = {
   #   enable = true;
   #   description = "RustDesk";

@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ./docker
@@ -19,7 +18,7 @@
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
-    supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = ["zfs"];
     zfs.extraPools = [
       "data1"
       "data2"
@@ -33,16 +32,13 @@
 
   # Filesystems
   fileSystems = {
-    "/".options = [ "compress=zstd" ];
+    "/".options = ["compress=zstd"];
     "/home" = {
       neededForBoot = true;
-      options = [ "compress=zstd" ];
+      options = ["compress=zstd"];
     };
-    "/nix".options = [
-      "compress=zstd"
-      "noatime"
-    ];
-    "/swap".options = [ "noatime" ];
+    "/nix".options = ["compress=zstd" "noatime"];
+    "/swap".options = ["noatime"];
   };
 
   swapDevices = [
@@ -56,7 +52,7 @@
     btrfs.autoScrub = {
       enable = true;
       interval = "monthly";
-      fileSystems = [ "/" ];
+      fileSystems = ["/"];
     };
     zfs = {
       autoScrub.enable = true;
