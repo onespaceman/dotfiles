@@ -64,7 +64,7 @@
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
           nixos-wsl.nixosModules.default
-          ./nix/base.nix
+          ./nix
           {
             wsl = {
               enable = true;

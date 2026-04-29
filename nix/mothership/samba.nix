@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   services = {
     samba = {
       enable = true;
@@ -14,34 +9,21 @@
           "server string" = config.networking.hostName;
           "netbios name" = config.networking.hostName;
           "security" = "user";
-          #"use sendfile" = "yes";
-          #"max protocol" = "smb2";
-          # note: localhost is the ipv6 localhost ::1
           "hosts allow" = "10.0.0. 127.0.0.1 localhost";
           "hosts deny" = "0.0.0.0/0";
           "guest account" = "nobody";
-          "map to guest" = "bad user";
+          "browseable" = "yes";
+          "read only" = "yes";
+          # "guest ok" = "yes";
+          "write list" = "spaceman";
+          "create mask" = "0644";
+          "force user" = "spaceman";
+          "force group" = "users";
         };
-        # "public" = {
-        #   "path" = "/mnt/Shares/Public";
-        #   "browseable" = "yes";
-        #   "read only" = "no";
-        #   "guest ok" = "yes";
-        #   "create mask" = "0644";
-        #   "directory mask" = "0755";
-        #   "force user" = "spaceman";
-        #   "force group" = "users";
-        # };
-        # "private" = {
-        #   "path" = "/mnt/Shares/Private";
-        #   "browseable" = "yes";
-        #   "read only" = "no";
-        #   "guest ok" = "no";
-        #   "create mask" = "0644";
-        #   "directory mask" = "0755";
-        #   "force user" = "spaceman";
-        #   "force group" = "users";
-        # };
+        book.path = "/mnt/3/book";
+        dl.path = "/mnt/1/dl";
+        mov.path = "/mnt/1/mov";
+        mus.path = "/mnt/3/mus";
       };
     };
 

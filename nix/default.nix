@@ -55,7 +55,6 @@
   users.users.spaceman = {
     isNormalUser = true;
     extraGroups = [
-      "docker"
       "networkmanager"
       "storage"
       "wheel"

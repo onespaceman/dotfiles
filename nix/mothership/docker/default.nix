@@ -12,6 +12,8 @@
     ./silverbullet.nix
   ];
 
+  users.users.spaceman.extraGroups = ["docker"];
+
   system.activationScripts.mkDockerNetworks = ''
     ${pkgs.docker}/bin/docker network create pub > /dev/null 2>&1 || true
     ${pkgs.docker}/bin/docker network create --internal priv > /dev/null 2>&1 || true
