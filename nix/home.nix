@@ -60,6 +60,8 @@
             "C-space" = "completion";
           };
           normal = {
+            "w" = "extend_next_word_start";
+            "W" = "extend_prev_word_end";
             "X" = "select_line_above";
             "C-w" = ":buffer-close";
           };

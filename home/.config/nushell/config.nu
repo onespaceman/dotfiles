@@ -19,19 +19,21 @@ def create_left_prompt [] {
 
   $prompt ++= $"($env.PWD | str replace -r $"^($env.HOME)" "~") "
 
-  let git_status = (git status -bs --porcelain=2 | complete | get stdout | str trim | lines)
+  let git_status = (git status -bs | complete | get stdout | str trim | lines)
   if (($git_status | length) > 0) {
     $prompt ++= $"(ansi reset)["
-    $prompt ++= if (($git_status | parse -r '^\?' | length) > 0) {   # untracked files
-      (ansi red)
-    } else if (($git_status| parse -r '^\d .[ADMN]' | length) > 0 ) { # unstaged changes
-      (ansi purple)
-    } else if (($git_status| parse -r '^\d [ADMN]' | length) > 0 ) {   # staged changes
-      (ansi yellow)
-    } else {                                                         # clear
-      (ansi green)
-    }
-    $prompt ++= $"($git_status | parse -r '^# branch\.head (.*)' | get capture0.0)(ansi reset)] "
+
+    let parsed = ($git_status | parse -r '^(?:([MADR])|.)([MADR?])?')
+    $prompt ++= if (($parsed.capture1 | str join | str length) > 0) { (ansi red) # unstaged changes
+    } else if (($parsed.capture0 | str join | str length) > 0) { (ansi yellow)   # staged chages
+    } else { (ansi green) }                                                      # clear
+
+    $prompt ++= ($git_status | parse -r '^## (.*)\.\.\.' | get capture0.0)
+    if ("D" in $parsed.capture1) { $prompt ++= $"(ansi red)⨯" } else if ("D" in $parsed.capture0) { $prompt ++= $"(ansi yellow)✘ " } # deleted
+    if ("A" in $parsed.capture0) { $prompt ++= $"(ansi yellow)+" } # added
+    if ("M" in $parsed.capture1) { $prompt ++= $"(ansi yellow)!" } # modified
+    if ('?' in $parsed.capture1) { $prompt ++= $"(ansi purple)?" } # untracked files
+    $prompt ++= $"(ansi reset)] "
   }
 
   $prompt
