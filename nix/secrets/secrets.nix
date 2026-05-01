@@ -7,6 +7,7 @@ in {
   "cloudflare.age".publicKeys = all;
   "koito.age".publicKeys = all;
   "miniflux.age".publicKeys = all;
+  "restic.age".publicKeys = all;
   "silverbullet.age".publicKeys = all;
   "ups.age".publicKeys = all;
 }

@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./backup.nix
     ./docker
     ./samba.nix
     ./ups.nix
