@@ -1,28 +1,15 @@
-{config, ...}: {
-  age.secrets.koito.file = ../../secrets/koito.age;
-
+{...}: {
   virtualisation.oci-containers.containers = {
     koito = {
       image = "gabehf/koito:latest";
       hostname = "koito";
       autoStart = true;
-      dependsOn = ["koito-db"];
-      networks = [
-        "priv"
-        "pub"
-      ];
+      networks = ["pub"];
       ports = ["4110:4110"];
       volumes = ["/docker/koito:/etc/koito"];
-      environmentFiles = [config.age.secrets.koito.path];
-    };
-    koito-db = {
-      image = "postgres:18";
-      hostname = "koito-db";
-      autoStart = true;
-      ports = ["5432:5432"];
-      networks = ["priv"];
-      volumes = ["/docker/koito/db:/var/lib/postgresql"];
-      environmentFiles = [config.age.secrets.koito.path];
+      environment = {
+        KOITO_SQLITE_ENABLED = "true";
+      };
     };
     multi-scrobbler = {
       image = "ghcr.io/foxxmd/multi-scrobbler:latest";
