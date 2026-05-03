@@ -20,12 +20,15 @@
       timeout = 0;
     };
     supportedFilesystems = ["zfs"];
-    zfs.extraPools = [
-      "data1"
-      "data2"
-      "data3"
-      "seagatemirror"
-    ];
+    zfs = {
+      forceImportRoot = false;
+      extraPools = [
+        "data1"
+        "data2"
+        "data3"
+        "seagatemirror"
+      ];
+    };
   };
 
   powerManagement.cpuFreqGovernor = "ondemand";

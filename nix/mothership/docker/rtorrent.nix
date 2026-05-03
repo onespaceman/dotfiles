@@ -1,7 +1,7 @@
 {...}: {
   virtualisation.oci-containers.containers.rtorrent = {
     image = "ghcr.io/crazy-max/rtorrent-rutorrent:latest";
-    hostname = "rtorrent";
+    hostname = "rt";
     autoStart = true;
     networks = ["pub"];
     ports = [

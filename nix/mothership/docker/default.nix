@@ -9,6 +9,7 @@
     ./miniflux.nix
     ./navidrome.nix
     ./rtorrent.nix
+    ./searxng.nix
     ./silverbullet.nix
   ];
 
