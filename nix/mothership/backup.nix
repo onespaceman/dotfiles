@@ -18,18 +18,14 @@
       "/home/"
       "/mnt/3/"
     ];
-    exclude = [
-      "/home/.*"
-      "/docker/koito/db"
-      "/docker/miniflux"
-    ];
     pruneOpts = [
+      "--keep-hourly 4"
       "--keep-daily 7"
       "--keep-weekly 5"
       "--keep-monthly 12"
     ];
     timerConfig = {
-      OnCalendar = "daily";
+      OnCalendar = "*-*-* 0-23/6:00:00";
       Persistent = true;
     };
   };
