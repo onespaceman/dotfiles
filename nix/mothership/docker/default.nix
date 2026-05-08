@@ -5,6 +5,7 @@
     ./calibre.nix
     ./cloudflared.nix
     ./jellyfin.nix
+    ./git.nix
     ./koito.nix
     ./miniflux.nix
     ./navidrome.nix

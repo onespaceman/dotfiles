@@ -28,7 +28,7 @@ def create_left_prompt [] {
     } else if (($parsed.capture0 | str join | str length) > 0) { (ansi yellow)   # staged chages
     } else { (ansi green) }                                                      # clear
 
-    $prompt ++= ($git_status | parse -r '^## (.*)(?:\.\.\.|$)' | get capture0.0)
+    $prompt ++= ($git_status | parse -r '^## (.*?)(?:\.\.\.|$)' | get capture0.0)
     if ("D" in $parsed.capture1) { $prompt ++= $"(ansi red)⨯" } else if ("D" in $parsed.capture0) { $prompt ++= $"(ansi yellow)⨯" } # deleted
     if ("A" in $parsed.capture0) { $prompt ++= $"(ansi yellow)+" } # added
     if ("M" in $parsed.capture1) { $prompt ++= $"(ansi yellow)!" } # modified

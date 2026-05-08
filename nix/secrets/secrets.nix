@@ -5,6 +5,7 @@ let
 in {
   "arcane.age".publicKeys = all;
   "cloudflare.age".publicKeys = all;
+  "gitserver.age".publicKeys = all;
   "koito.age".publicKeys = all;
   "miniflux.age".publicKeys = all;
   "restic.age".publicKeys = all;
