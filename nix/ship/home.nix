@@ -46,7 +46,6 @@
         DisableSetDesktopBackground = true;
         DisablePocket = true;
         DisableTelemetry = true;
-        OfferToSaveLogins = false;
         FirefoxHome = {
           SponsoredTopSites = false;
           Highlights = false;
@@ -57,21 +56,48 @@
         FirefoxSuggest.SponsoredSuggestions = false;
         GenerativeAI.Enabled = false;
         NoDefaultBookmarks = true;
+        OfferToSaveLogins = false;
         OfferToSaveLoginsDefault = false;
+        SearchEngines = {
+          Default = "searchy";
+          Add = [
+            {
+              Name = "searchy";
+              Description = "searchy";
+              IconURL = "https://s.spaceman.one/static/themes/simple/img/favicon.png";
+              URLTemplate = "https://s.spaceman.one/search?q={searchTerms}";
+            }
+          ];
+          Remove = [
+            "Amazon"
+            "Amazon.com"
+            "Bing"
+            "eBay"
+            "Perplexity"
+          ];
+        };
       };
       profiles.default = {
         userChrome = builtins.readFile ../../userChrome.css;
         containers = {};
         containersForce = true;
-        search = {
-          force = true;
-          default = "dgg";
-          privateDefault = "dgg";
-        };
+        # search = {
+        #   force = true;
+        #   default = "searchy";
+        #   privateDefault = "searchy";
+        #   engines = {
+        #     searchy = {
+        #       name = "searchy";
+        #       iconurl = "https://s.spaceman.one/static/themes/simple/img/favicon.png";
+        #       urls = [{template = "https://s.spaceman.one/search?q={searchTerms}";}];
+        #     };
+        #     amazondotcom-us.metadata.hidden = true;
+        #     bing.metadata.hidden = true;
+        #   };
+        # };
         settings = {
-          toolkit.legacyUserProfileCustomizations.stylesheets = true;
-          browser.fixup.dns_first_for_single_words = true;
           browser.ml.linkPreview.enabled = false;
+          toolkit.legacyUserProfileCustomizations.stylesheets = true;
         };
       };
     };
