@@ -60,10 +60,14 @@
             "C-space" = "completion";
           };
           normal = {
+            "e" = "extend_next_word_end";
+            "E" = "extend_prev_word_end";
             "w" = "extend_next_word_start";
-            "W" = "extend_prev_word_end";
+            "W" = "extend_prev_word_start";
             "X" = "select_line_above";
-            "C-w" = ":buffer-close";
+            "C-s" = ":write";
+            "C-7" = "toggle_comments"; # 7=/ for some reason
+            space."space" = "command_palette";
           };
         };
       };
