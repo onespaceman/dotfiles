@@ -15,7 +15,7 @@
       };
     };
     searxng-cache = {
-      image = "docker.io/valkey/valkey:9-alpine";
+      image = "valkey/valkey:9-alpine";
       hostname = "searxng-cache";
       autoStart = true;
       networks = ["priv"];

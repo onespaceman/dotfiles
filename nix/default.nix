@@ -59,6 +59,7 @@
       "storage"
       "wheel"
     ];
+    linger = true;
     createHome = true;
     hashedPassword = "$y$j9T$.oBXCoD8or9FJNQLQxAVU/$oe0TW9EJWgMRLsFmh7GQXkVBQdF4Ll6QsLnp/dnPjk6";
   };

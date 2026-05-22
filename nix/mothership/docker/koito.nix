@@ -7,9 +7,6 @@
       networks = ["pub"];
       ports = ["4110:4110"];
       volumes = ["/docker/koito:/etc/koito"];
-      environment = {
-        KOITO_SQLITE_ENABLED = "true";
-      };
     };
     multi-scrobbler = {
       image = "ghcr.io/foxxmd/multi-scrobbler:latest";

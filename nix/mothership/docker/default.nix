@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   imports = [
-    ./arcane.nix
     ./beets.nix
     ./calibre.nix
     ./cloudflared.nix
+    ./docky.nix
     ./jellyfin.nix
     ./git.nix
     ./koito.nix
@@ -35,4 +35,15 @@
     };
     oci-containers.backend = "docker";
   };
+
+  security.polkit.extraConfig = ''
+    polkit.addRule(function (action, subject) {
+      if (subject.isInGroup("docker") &&
+        action.id == "org.freedesktop.systemd1.manage-units" &&
+        action.lookup("unit").startsWith("docker-")
+      ) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 }
