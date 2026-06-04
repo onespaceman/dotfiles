@@ -1,25 +1,9 @@
-{pkgs, ...}: {
-  imports = [
-    ./beets.nix
-    ./calibre.nix
-    ./cloudflared.nix
-    ./docky.nix
-    ./jellyfin.nix
-    ./git.nix
-    ./koito.nix
-    ./miniflux.nix
-    ./navidrome.nix
-    ./rtorrent.nix
-    ./searxng.nix
-    ./silverbullet.nix
-  ];
-
+{
+  config,
+  pkgs,
+  ...
+}: {
   users.users.spaceman.extraGroups = ["docker"];
-
-  system.activationScripts.mkDockerNetworks = ''
-    ${pkgs.docker}/bin/docker network create --ipv6 pub > /dev/null 2>&1 || true
-    ${pkgs.docker}/bin/docker network create --internal priv > /dev/null 2>&1 || true
-  '';
 
   virtualisation = {
     docker = {
@@ -33,17 +17,22 @@
         dates = "weekly";
       };
     };
-    oci-containers.backend = "docker";
   };
 
-  security.polkit.extraConfig = ''
-    polkit.addRule(function (action, subject) {
-      if (subject.isInGroup("docker") &&
-        action.id == "org.freedesktop.systemd1.manage-units" &&
-        action.lookup("unit").startsWith("docker-")
-      ) {
-        return polkit.Result.YES;
-      }
-    });
-  '';
+  age.secrets.docker.file = ../../secrets/docker.age;
+
+  systemd.services.docker-stack = {
+    description = "Docker Compose Stack";
+    after = ["network.target" "docker.service"];
+    wants = ["docker.service"];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.docker}/bin/docker compose --env-file ${config.age.secrets.docker.path} -f ${./compose.yml} up";
+      ExecStop = "${pkgs.docker}/bin/docker compose -f ${./compose.yml} down";
+      WorkingDirectory = "/docker";
+      Restart = "always";
+    };
+
+    wantedBy = ["multi-user.target"];
+  };
 }

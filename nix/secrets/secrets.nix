@@ -3,9 +3,7 @@ let
   mothership = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZQgoB5SIFfFy2h59D+zVHLjdo5tUX+BsUkAM4gwZj5 root@mothership";
   all = [spaceman mothership];
 in {
-  "cloudflare.age".publicKeys = all;
-  "miniflux.age".publicKeys = all;
+  "docker.age".publicKeys = all;
   "restic.age".publicKeys = all;
-  "silverbullet.age".publicKeys = all;
   "ups.age".publicKeys = all;
 }

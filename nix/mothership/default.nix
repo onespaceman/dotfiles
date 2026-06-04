@@ -106,4 +106,17 @@
   };
   # required for openssh match address to work
   security.pam.services.sshd.unixAuth = lib.mkForce true;
+
+  security.sudo-rs.extraRules = [
+    # Allow smartctl with no sudo
+    {
+      users = ["spaceman"];
+      commands = [
+        {
+          command = "${pkgs.smartmontools}/bin/smartctl";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
 }
