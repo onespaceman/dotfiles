@@ -66,6 +66,7 @@
               Description = "searchy";
               IconURL = "https://s.spaceman.one/static/themes/simple/img/favicon.png";
               URLTemplate = "https://s.spaceman.one/search?q={searchTerms}";
+              SuggestURLTemplate = "https://s.spaceman.one/autocomplete?q={searchTerms}";
             }
           ];
           Remove = [

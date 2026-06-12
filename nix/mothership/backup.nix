@@ -25,7 +25,7 @@
       "--keep-monthly 12"
     ];
     timerConfig = {
-      OnCalendar = "*-*-* 0-23/6:00:00";
+      OnCalendar = "daily";
       Persistent = true;
     };
   };

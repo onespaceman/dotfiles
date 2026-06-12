@@ -118,6 +118,16 @@ services:
       - TZ=America/New_York
       - PUID=1000
       - PGID=100
+      - CACHE_VALKEY=redis://scrobbler-cache:6379
+    volumes:
+      - /docker/multiscrobbler:/config
+    restart: unless-stopped
+  scrobbler-cache:
+    image: valkey/valkey:9-alpine
+    container_name: scrobbler-cache
+    networks: [priv]
+    volumes:
+      - /docker/multiscrobbler/cache:/data
     restart: unless-stopped
 
   miniflux:

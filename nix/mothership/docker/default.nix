@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  cfg = ./.;
+in {
   users.users.spaceman.extraGroups = ["docker"];
 
   virtualisation = {
@@ -27,9 +29,9 @@
     wants = ["docker.service"];
 
     serviceConfig = {
-      ExecStart = "${pkgs.docker}/bin/docker compose --env-file ${config.age.secrets.docker.path} -f ${./compose.yml} up";
-      ExecStop = "${pkgs.docker}/bin/docker compose -f ${./compose.yml} down";
-      WorkingDirectory = "/docker";
+      ExecStart = "${pkgs.docker}/bin/docker compose --env-file ${config.age.secrets.docker.path} -f ${cfg}/compose.yml up";
+      ExecStop = "${pkgs.docker}/bin/docker compose -f ${cfg}/compose.yml down";
+      WorkingDirectory = "${cfg}";
       Restart = "always";
     };
 
