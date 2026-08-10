@@ -14,7 +14,7 @@
       klassy
       krita
       qview
-      transmission_4-qt6
+      transmission_4-qt
     ];
   };
 
@@ -82,20 +82,6 @@
         userChrome = builtins.readFile ../../userChrome.css;
         containers = {};
         containersForce = true;
-        # search = {
-        #   force = true;
-        #   default = "searchy";
-        #   privateDefault = "searchy";
-        #   engines = {
-        #     searchy = {
-        #       name = "searchy";
-        #       iconurl = "https://s.spaceman.one/static/themes/simple/img/favicon.png";
-        #       urls = [{template = "https://s.spaceman.one/search?q={searchTerms}";}];
-        #     };
-        #     amazondotcom-us.metadata.hidden = true;
-        #     bing.metadata.hidden = true;
-        #   };
-        # };
         settings = {
           browser.ml.linkPreview.enabled = false;
           toolkit.legacyUserProfileCustomizations.stylesheets = true;

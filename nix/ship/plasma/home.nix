@@ -41,10 +41,6 @@
           };
         };
       };
-      krunner = {
-        position = "center";
-        shortcuts.launch = "Meta";
-      };
       kscreenlocker.timeout = 30;
       kwin = {
         cornerBarrier = false;
