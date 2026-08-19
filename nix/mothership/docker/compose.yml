@@ -1,8 +1,33 @@
 name: main_stack
 services:
+  # management
+  dockhand:
+    image: fnsys/dockhand:latest
+    container_name: dockhand
+    restart: unless-stopped
+    group_add: [131]
+    networks: [pub]
+    ports:
+      - 8080:3000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /docker/dockhand:/app/data
+
+  # networking
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    networks: [pub]
+    command: ["tunnel", "run"]
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+
+  # services
   beets:
     image: lscr.io/linuxserver/beets:latest
     container_name: beets
+    restart: unless-stopped
     networks: [pub]
     environment:
       - PUID=1000
@@ -12,11 +37,11 @@ services:
       - /mnt/3/mus/:/music
       - /mnt/1/dl/:/downloads
       - /docker/beets:/config
-    restart: unless-stopped
 
   calibre:
     image: crocodilestick/calibre-web-automated:latest
     container_name: calibre-web
+    restart: unless-stopped
     networks: [pub]
     ports:
       - 50005:8083/tcp
@@ -27,33 +52,11 @@ services:
     volumes:
       - /docker/calibre-web:/config
       - /mnt/3/book:/calibre-library
-    restart: unless-stopped
-
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: cloudflared
-    networks: [pub]
-    command: ["tunnel", "run"]
-    environment:
-      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
-    restart: unless-stopped
-
-  docky:
-    image: git.spaceman.one/spaceman/docky:latest
-    container_name: docky
-    networks: [pub]
-    ports:
-      - 8090:80
-    environment:
-      - USERNAME=${DOCKY_USERNAME}
-      - PASSWORD=${DOCKY_PASSWORD}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
 
   git:
     image: codeberg.org/forgejo/forgejo:15-rootless
     container_name: git
+    restart: unless-stopped
     user: 1000:100
     networks: [pub]
     ports:
@@ -74,11 +77,11 @@ services:
     volumes:
       - /docker/forgejo:/var/lib/gitea
       - /etc/localtime:/etc/localtime:ro
-    restart: unless-stopped
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    restart: unless-stopped
     networks: [pub]
     ports:
       - 50500:8096 # http
@@ -96,20 +99,20 @@ services:
       - /docker/jellyfin:/config
       - /mnt/1/mov/tv/:/data/tvshows
       - /mnt/1/mov/movies/:/data/movies
-    restart: unless-stopped
 
   koito:
     image: gabehf/koito:latest
     container_name: koito
+    restart: unless-stopped
     networks: [pub]
     ports:
       - 4110:4110
     volumes:
       - /docker/koito:/etc/koito
-    restart: unless-stopped
   multi-scrobbler:
     image: ghcr.io/foxxmd/multi-scrobbler:latest
     container_name: multi-scrobbler
+    restart: unless-stopped
     networks:
       - pub
     ports:
@@ -121,32 +124,32 @@ services:
       - CACHE_VALKEY=redis://scrobbler-cache:6379
     volumes:
       - /docker/multiscrobbler:/config
-    restart: unless-stopped
   scrobbler-cache:
     image: valkey/valkey:9-alpine
     container_name: scrobbler-cache
+    restart: unless-stopped
     networks: [priv]
     volumes:
       - /docker/multiscrobbler/cache:/data
-    restart: unless-stopped
 
   miniflux:
     image: miniflux/miniflux:latest
     container_name: miniflux
+    restart: unless-stopped
     depends_on: [miniflux-db]
     networks: [pub, priv]
     ports:
       - 51111:8080/tcp
     environment:
-      - DATABASE_URL=${MINIFLUX_DATABASE_URL}
+      - DATABASE_URL=postgres://${MINIFLUX_POSTGRES_USER}:${MINIFLUX_POSTGRES_PASSWORD}@miniflux-db/minifluxdb?sslmode=disable
       - RUN_MIGRATIONS=1
       - CREATE_ADMIN=1
       - ADMIN_USERNAME=${MINIFLUX_ADMIN_USERNAME}
       - ADMIN_PASSWORD=${MINIFLUX_ADMIN_PASSWORD}
-    restart: unless-stopped
   miniflux-db:
     image: postgres:18
     container_name: miniflux-db
+    restart: unless-stopped
     networks: [priv]
     environment:
       - POSTGRES_DB=miniflux
@@ -158,11 +161,11 @@ services:
       test: ["CMD", "pg_isready", "-U", "miniflux"]
       interval: 10s
       start_period: 30s
-    restart: unless-stopped
 
   navidrome:
     image: deluan/navidrome:latest
     container_name: navidrome
+    restart: unless-stopped
     networks: [pub]
     ports:
       - 55666:4533/tcp
@@ -172,11 +175,11 @@ services:
     volumes:
       - /docker/navidrome:/data
       - /mnt/3/mus:/music
-    restart: unless-stopped
 
   rt:
     image: ghcr.io/crazy-max/rtorrent-rutorrent:latest
     container_name: rt
+    restart: unless-stopped
     networks: [pub]
     ports:
       - 6881:6881/udp # RT DHT
@@ -193,11 +196,11 @@ services:
       - /docker/rtorrent/passwd:/passwd
       - /mnt/1/dl/downloads:/downloads
       - /mnt/1/dl/watch:/data/rtorrent/watch
-    restart: unless-stopped
 
   searxng:
     image: searxng/searxng:latest
     container_name: searxng
+    restart: unless-stopped
     networks: [pub, priv]
     ports:
       - 45000:8080
@@ -206,25 +209,24 @@ services:
     volumes:
       - /docker/searxng:/etc/searxng
       - /docker/searxng/cache:/var/cache/searxng
-    restart: unless-stopped
   searxng-cache:
     image: valkey/valkey:9-alpine
     container_name: searxng-cache
+    restart: unless-stopped
     networks: [priv]
     command: ["valkey-server", "--save", "30", "1", "--loglevel", "warning"]
     volumes:
       - valkey-data:/data
-    restart: unless-stopped
 
   silverbullet:
     image: ghcr.io/silverbulletmd/silverbullet:v2
     container_name: silverbullet
+    restart: unless-stopped
+    user: 1000:100
     networks: [pub]
     ports:
       - 3000:3000/tcp
     environment:
-      - PUID=1000
-      - PGID=100
       - TZ=America/New_York
       - SB_REMEMBER_ME_HOURS=720
       - SB_USER=${SB_USER}
