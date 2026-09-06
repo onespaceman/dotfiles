@@ -9,7 +9,14 @@
     packages = with pkgs; [
       blender
       ffmpeg
-      iosevka
+      (iosevka.override
+        {
+          privateBuildPlan = {
+            family = "Iosevka Term";
+            spacing = "term";
+            serifs = "sans";
+          };
+        })
       kara # plasma panel nav
       klassy
       krita
@@ -36,7 +43,13 @@
     };
   };
 
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    antialiasing = true;
+    defaultFonts = {
+      monospace = ["Iosevka"];
+    };
+  };
 
   programs = {
     firefox = {
@@ -94,7 +107,7 @@
       settings = {
         main = {
           shell = "/run/current-system/sw/bin/tmux";
-          font = "Iosevka:size=12";
+          font = "Iosevka Term:size=12";
           initial-window-size-chars = "170x35";
         };
         cursor.style = "beam";
