@@ -50,7 +50,10 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              sharedModules = [plasma-manager.homeModules.plasma-manager];
+              sharedModules = [
+                agenix.homeManagerModules.default
+                plasma-manager.homeModules.plasma-manager
+              ];
               users.spaceman.imports = [./nix/ship/home.nix];
             };
           }
