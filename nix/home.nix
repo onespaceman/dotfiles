@@ -4,7 +4,7 @@
   ...
 }: {
   home = {
-    stateVersion = "26.05";
+    stateVersion = "26.11";
     username = "spaceman";
     homeDirectory = "/home/spaceman";
     packages = with pkgs; [
@@ -26,7 +26,10 @@
     carapace = {
       enable = true;
       enableNushellIntegration = true;
-      ignoreCase = true;
+      environment = {
+        CARAPACE_MATCH = true;
+        CARAPACE_MERGEFLAGS = true;
+      };
     };
     direnv = {
       enable = true;
@@ -95,6 +98,7 @@
       enable = true;
       configFile.source = ../home/.config/nushell/config.nu;
       environmentVariables.LS_COLORS = lib.hm.nushell.mkNushellInline "${pkgs.vivid}/bin/vivid generate catppuccin-mocha";
+      plugins = [pkgs.nushellPlugins.gstat];
     };
   };
 }

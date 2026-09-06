@@ -11,42 +11,38 @@ alias gs = git status
 
 # PROMPT THEME
 def create_left_prompt [] {
-  mut prompt = (ansi reset)
+  mut p = (ansi reset) # the prompt string
 
   if ("SSH_CLIENT" in $env) {
-    $prompt ++= $"(ansi blue)($env.USER)@(sys host | get hostname)(ansi reset) "
+    $p ++= $"(ansi blue)($env.USER)@(sys host | get hostname)(ansi reset) "
   }
 
-  $prompt ++= $"($env.PWD | str replace -r $"^($env.HOME)" "~") "
+  $p ++= $"($env.PWD | str replace -r $"^($env.HOME)" "~")"
 
-  let git_status = (git status -bs | complete | get stdout | str trim | lines)
-  if (($git_status | length) > 0) {
-    $prompt ++= $"(ansi reset)["
+  try { # in case gstat is not installed
+    let g = (gstat)
+    if ($g.repo_name != "no_repository") {
+      $p ++= $"(ansi reset)["
+      
+      let staged = ($g.idx_added_staged + $g.idx_modified_staged + $g.idx_deleted_staged + $g.idx_renamed + $g.idx_type_changed)
+      let unstaged = ($g.wt_untracked + $g.wt_modified + $g.wt_deleted + $g.wt_type_changed + $g.wt_renamed)
+      if ($staged > 0 and $unstaged > 0) { $p ++= (ansi purple) # both
+      } else if ($staged > 0) { (ansi yellow) #staged changes
+      } else if ($unstaged > 0) { (ansi red)
+      } else { (ansi green) } # clear
+      $p ++= $g.repo_name
 
-    let parsed = ($git_status | parse -r '^(?:([MADR])|.)([MADR?])?')
-    $prompt ++= if (($parsed.capture1 | str join | str length) > 0) { (ansi red) # unstaged changes
-    } else if (($parsed.capture0 | str join | str length) > 0) { (ansi yellow)   # staged chages
-    } else { (ansi green) }                                                      # clear
-
-    $prompt ++= ($git_status | parse -r '^## (.*?)(?:\.\.\.|$)' | get capture0.0)
-    if ("D" in $parsed.capture1) { $prompt ++= $"(ansi red)⨯" } else if ("D" in $parsed.capture0) { $prompt ++= $"(ansi yellow)⨯" } # deleted
-    if ("A" in $parsed.capture0) { $prompt ++= $"(ansi yellow)+" } # added
-    if ("M" in $parsed.capture1) { $prompt ++= $"(ansi yellow)!" } # modified
-    if ('?' in $parsed.capture1) { $prompt ++= $"(ansi purple)?" } # untracked files
-    $prompt ++= $"(ansi reset)] "
+      $p ++= if ($g.wt_deleted > 0) { $"(ansi red)⨯"} else if ($g.idx_deleted_staged > 0) { $"(ansi yellow)⨯" } else { "" } # deleted
+      $p ++= if ($g.wt_modified + $g.wt_type_changed + $g.wt_renamed > 0) { $"(ansi red)❉"
+      } else if ($g.idx_modified_staged + $g.idx_type_changed + $g.idx_renamed > 0) { $"(ansi yellow)❉" } else { "" } # modified
+      $p ++= if ($g.idx_added_staged > 0) { $"(ansi yellow)+" } else { "" } # added
+      $p ++= if ($g.wt_untracked > 0) { $"(ansi yellow)?" } else { "" } # untracked
+      $p ++= $"(ansi reset)]"
+    }
   }
-
-  $prompt
-}
-
-def create_indicator [] {
-  if (is-admin) {
-    $"(ansi red_bold)# "
-  } else {
-    $"(ansi cyan)» "
-  }
+  $p
 }
 
 $env.PROMPT_COMMAND = { create_left_prompt }
-$env.PROMPT_INDICATOR = { create_indicator }
+$env.PROMPT_INDICATOR = { if (is-admin) { $" (ansi red_bold)# " } else { $" (ansi cyan)» " } }
 $env.PROMPT_COMMAND_RIGHT = ""
