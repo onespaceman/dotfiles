@@ -21,15 +21,6 @@
       "udev.log_level=3"
       "systemd.show_status=auto"
     ];
-    plymouth = {
-      enable = true;
-      theme = "circle_alt";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = ["circle_alt"];
-        })
-      ];
-    };
   };
 
   swapDevices = [
