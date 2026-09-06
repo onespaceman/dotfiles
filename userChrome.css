@@ -2,23 +2,24 @@
 menupopset,
 tooltip,
 panel {
-  font-family: sans-serif !important;
-  --toolbar-bgcolor: #1e1e1e !important;
+  --toolbar-background-color: #1e1e1e !important;
   --space-medium: 2px !important;
+  --chrome-content-separator-color: transparent !important;
+  --chrome-window-gap: -1px !important;
 }
 
 /* Private Colors */
 :root[privatebrowsingmode="temporary"] {
-  --toolbar-bgcolor: #25003e !important;
-  --toolbox-non-lwt-bgcolor-inactive: #25003e !important;
-  --toolbox-non-lwt-bgcolor: #25003e !important;
+  --toolbar-background-color: #25003e !important;
+  --toolbox-non-lwt-background-color-inactive: #25003e !important;
+  --toolbox-non-lwt-background-color: #25003e !important;
 }
 
 /* Window borders */
 @media (-moz-platform: linux) {
   :root > body {
     box-sizing: border-box;
-    border-color: var(--toolbox-bgcolor-inactive);
+    border-color: var(--toolbox-background-color-inactive);
     border-style: solid;
     border-width: 2px;
     border-radius: 5px;
@@ -29,21 +30,22 @@ panel {
   }
 }
 
-:root[titlepreface*="🦊"] #urlbar-container {
-  margin-inline: 4px !important;
+/* Url bar */
+.urlbar-input-container {
+  outline: none !important;
 }
 
 /* New Sidebar */
-#sidebar-main {
+#sidebar-container {
   -moz-window-dragging: drag;
-}
-
-#sidebar-box {
-  min-width: 30px !important;
 }
 
 .wrapper .buttons-wrapper > * {
   -moz-window-dragging: no-drag;
+}
+
+#sidebar-box {
+  min-width: 30px !important;
 }
 
 #sidebar-panel-header {
