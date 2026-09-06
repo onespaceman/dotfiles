@@ -26,7 +26,7 @@ def create_left_prompt [] {
       
       let staged = ($g.idx_added_staged + $g.idx_modified_staged + $g.idx_deleted_staged + $g.idx_renamed + $g.idx_type_changed)
       let unstaged = ($g.wt_untracked + $g.wt_modified + $g.wt_deleted + $g.wt_type_changed + $g.wt_renamed)
-      if ($staged > 0 and $unstaged > 0) { $p ++= (ansi purple) # both
+      $p ++= if ($staged > 0 and $unstaged > 0) { (ansi purple) # both
       } else if ($staged > 0) { (ansi yellow) #staged changes
       } else if ($unstaged > 0) { (ansi red)
       } else { (ansi green) } # clear
