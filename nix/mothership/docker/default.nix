@@ -16,7 +16,7 @@
     ./rt.nix
     ./searxng.nix
     ./scrobbles.nix
-    ./silverbullet
+    ./silverbullet.nix
   ];
 
   users.users.spaceman.extraGroups = ["docker"];
