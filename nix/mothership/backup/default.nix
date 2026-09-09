@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  age.secrets.restic.file = ../secrets/restic.age;
+  age.secrets.restic.file = ./restic.age;
 
   environment.systemPackages = [pkgs.restic];
 

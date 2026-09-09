@@ -6,10 +6,10 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./backup.nix
+    ./backup
     ./docker
     ./samba.nix
-    ./ups.nix
+    ./ups
   ];
 
   # Boot
