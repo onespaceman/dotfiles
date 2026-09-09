@@ -72,7 +72,6 @@
     firewall = {
       enable = true;
       allowPing = true;
-      extraCommands = "iptables -I nixos-fw 1 -i br+ -j ACCEPT"; # allow docker networks
     };
     hostId = "1e1e1e1e";
     hostName = "mothership";

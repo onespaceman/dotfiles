@@ -2,39 +2,44 @@
   config,
   pkgs,
   ...
-}: let
-  cfg = ./.;
-in {
+}: {
+  imports = [
+    ./beets.nix
+    ./calibre.nix
+    ./caddy
+    ./dockhand.nix
+    ./git.nix
+    ./jellyfin.nix
+    ./miniflux
+    ./navidrome.nix
+    ./pocketid
+    ./rt.nix
+    ./searxng.nix
+    ./scrobbles.nix
+    ./silverbullet
+  ];
+
   users.users.spaceman.extraGroups = ["docker"];
+
+  networking.firewall.extraCommands = "iptables -I nixos-fw 1 -i br+ -j ACCEPT"; # allow docker networks
+
+  # Create docker networks
+  system.activationScripts.mkDockerNetworks = ''
+    ${pkgs.docker}/bin/docker network create --ipv6 pub > /dev/null 2>&1 || true
+    ${pkgs.docker}/bin/docker network create --internal priv > /dev/null 2>&1 || true
+  '';
 
   virtualisation = {
     docker = {
       enable = true;
-      daemon.settings.dns = [
-        "1.1.1.1"
-        "8.8.8.8"
-      ];
+      daemon.settings = {
+        ipv6 = true;
+      };
       autoPrune = {
         enable = true;
         dates = "weekly";
       };
     };
-  };
-
-  age.secrets.docker.file = ../../secrets/docker.age;
-
-  systemd.services.docker-stack = {
-    description = "Docker Compose Stack";
-    after = ["network.target" "docker.service"];
-    wants = ["docker.service"];
-
-    serviceConfig = {
-      ExecStart = "${pkgs.docker}/bin/docker compose --env-file ${config.age.secrets.docker.path} -f ${cfg}/compose.yml up";
-      ExecStop = "${pkgs.docker}/bin/docker compose -f ${cfg}/compose.yml down";
-      WorkingDirectory = "${cfg}";
-      Restart = "always";
-    };
-
-    wantedBy = ["multi-user.target"];
+    oci-containers.backend = "docker";
   };
 }

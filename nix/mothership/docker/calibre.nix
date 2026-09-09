@@ -1,0 +1,22 @@
+{
+  virtualisation.oci-containers.containers.calibre = {
+    image = "crocodilestick/calibre-web-automated:latest";
+    hostname = "calibre";
+    autoStart = true;
+    environment = {
+      PUID = "1000";
+      PGID = "100";
+      TZ = "America/New_York";
+    };
+    networks = ["pub"];
+    ports = ["50005:8083/tcp"];
+    volumes = [
+      "/docker/calibre-web:/config"
+      "/mnt/3/book:/calibre-library"
+    ];
+    labels = {
+      "caddy" = "book.spaceman.one";
+      "caddy.reverse_proxy" = "{{upstreams 8083}}";
+    };
+  };
+}
