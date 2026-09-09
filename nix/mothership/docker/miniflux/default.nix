@@ -12,6 +12,7 @@
       ports = ["51111:8080/tcp"];
       labels = {
         "caddy" = "feed.spaceman.one";
+        "caddy.import" = "common";
         "caddy.reverse_proxy" = "{{upstreams 8080}}";
       };
     };

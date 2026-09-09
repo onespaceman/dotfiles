@@ -24,6 +24,7 @@
     ];
     labels = {
       "caddy" = "git.spaceman.one";
+      "caddy.import" = "common";
       "caddy.reverse_proxy" = "{{upstreams 3000}}";
     };
   };

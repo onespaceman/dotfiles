@@ -18,6 +18,7 @@
     ];
     labels = {
       "caddy" = "auth.spaceman.one";
+      "caddy.import" = "common";
       "caddy.reverse_proxy" = "{{upstreams 1411}}";
     };
   };

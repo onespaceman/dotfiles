@@ -9,6 +9,7 @@
       volumes = ["/docker/koito:/etc/koito"];
       labels = {
         "caddy" = "scrobble.spaceman.one";
+        "caddy.import" = "common";
         "caddy.reverse_proxy" = "{{upstreams 4110}}";
       };
     };
@@ -27,6 +28,7 @@
       volumes = ["/docker/multiscrobbler:/config"];
       labels = {
         "caddy" = "scrobbler.spaceman.one";
+        "caddy.import" = "common";
         "caddy.reverse_proxy" = "{{upstreams 9078}}";
       };
     };
