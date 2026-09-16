@@ -16,17 +16,13 @@
       "github.com/caddy-dns/cloudflare@v0.2.4"
       "github.com/lucaslorentz/caddy-docker-proxy/v2@v2.13.1"
       "github.com/mholt/caddy-dynamicdns@v0.0.0-20260805195708-67d107a42c02"
-      "github.com/hslatman/caddy-crowdsec-bouncer/http@v0.14.1"
-      "github.com/hslatman/caddy-crowdsec-bouncer/appsec@v0.14.1"
       "github.com/anujc4/caddy-geoblock@v0.1.2"
-      "github.com/greenpau/caddy-security@v1.1.64"
     ];
-    hash = "sha256-WwyKFiLcaYAQoV1MfU9GBOIOdyUyll19xKDLpWN1Qd0=";
-    doInstallCheck = false;
+    hash = "sha256-sCdJ4yS/OgASyrRid6aClHl0pPPFOnHVbBeB/uLFD9s=";
   };
   # Build caddy image
   caddy = pkgs.dockerTools.buildImage {
-    name = "caddy";
+    name = "caddy-custom";
     tag = "latest";
     fromImage = caddyBase;
     fromImageName = "caddy";
@@ -52,14 +48,13 @@ in {
   age.secrets.caddy.file = ./caddy.age;
 
   virtualisation.oci-containers.containers.caddy = {
-    image = "caddy:latest";
+    image = "caddy-custom:latest";
     imageFile = caddy;
     # image = "ghcr.io/serfriz/caddy-cloudflare-ddns-crowdsec-geoip-security-dockerproxy:latest";
     hostname = "caddy";
     autoStart = true;
     environment = {
       CADDY_INGRESS_NETWORKS = "pub";
-      # CADDY_DOCKER_CADDYFILE_PATH = "/base.caddy";
     };
     environmentFiles = [config.age.secrets.caddy.path];
     networks = ["pub"];
@@ -67,15 +62,14 @@ in {
     volumes = [
       "/var/run/docker.sock:/var/run/docker.sock"
       "/docker/caddy:/data"
-      "${geolite2Country}:/usr/share/geolite2-Country.mmdb"
-      # "/docker/caddy/base.caddy:/base.caddy"
+      "${geolite2Country}:/GeoLite2-Country.mmdb"
     ];
     labels = {
       "caddy_0.dynamic_dns.provider" = "cloudflare {env.CLOUDFLARE_TOKEN}";
       "caddy_0.dynamic_dns.domains.spaceman\\.one" = "*";
       "caddy_0.dynamic_dns.versions" = "ipv6";
       "caddy_1" = "(common)";
-      "caddy_1.geoblock.db_path" = "/usr/share/geolite2-Country.mmdb";
+      "caddy_1.geoblock.db_path" = "/GeoLite2-Country.mmdb";
       "caddy_1.geoblock.allow_countries" = "US";
     };
   };

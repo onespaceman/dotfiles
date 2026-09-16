@@ -13,7 +13,7 @@
       labels = {
         "caddy" = "feed.spaceman.one";
         "caddy.import" = "common";
-        "caddy.reverse_proxy" = "{{upstreams 8080}}";
+        "caddy.reverse_proxy" = "miniflux:8080";
       };
     };
     miniflux-db = {

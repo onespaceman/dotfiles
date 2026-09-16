@@ -25,7 +25,7 @@
     labels = {
       "caddy" = "jf.spaceman.one";
       "caddy.import" = "common";
-      "caddy.reverse_proxy" = "{{upstreams 8096}}";
+      "caddy.reverse_proxy" = "jellyfin:8096";
     };
   };
 }

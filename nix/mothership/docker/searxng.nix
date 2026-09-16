@@ -16,7 +16,7 @@
       labels = {
         "caddy" = "s.spaceman.one";
         "caddy.import" = "common";
-        "caddy.reverse_proxy" = "{{upstreams 8080}}";
+        "caddy.reverse_proxy" = "searxng:8080";
       };
     };
     searxng-cache = {

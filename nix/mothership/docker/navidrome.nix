@@ -16,7 +16,7 @@
     labels = {
       "caddy" = "mus.spaceman.one";
       "caddy.import" = "common";
-      "caddy.reverse_proxy" = "{{upstreams 4533}}";
+      "caddy.reverse_proxy" = "navidrome:4533";
     };
   };
 }

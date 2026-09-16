@@ -10,7 +10,7 @@
     environment = {
       APP_URL = "https://auth.spaceman.one";
       SESSION_DURATION = "1440";
-      TRUST_PROXY = "true";
+      # TRUST_PROXY = "true";
     };
     environmentFiles = [config.age.secrets.pocketid.path];
     volumes = [
@@ -19,7 +19,7 @@
     labels = {
       "caddy" = "auth.spaceman.one";
       "caddy.import" = "common";
-      "caddy.reverse_proxy" = "{{upstreams 1411}}";
+      "caddy.reverse_proxy" = "pocketid:1411";
     };
   };
 }

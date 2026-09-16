@@ -10,10 +10,10 @@
     labels = {
       "caddy_0" = "sb.spaceman.one";
       "caddy_0.import" = "common";
-      "caddy_0.reverse_proxy" = "{{upstreams 3000}}";
+      "caddy_0.reverse_proxy" = "silverbullet:3000";
       "caddy_1" = "note.spaceman.one";
       "caddy_1.import" = "common";
-      "caddy_1.reverse_proxy" = "{{upstreams 3000}}";
+      "caddy_1.reverse_proxy" = "silverbullet:3000";
     };
   };
 }

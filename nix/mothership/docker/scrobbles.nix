@@ -10,7 +10,7 @@
       labels = {
         "caddy" = "scrobble.spaceman.one";
         "caddy.import" = "common";
-        "caddy.reverse_proxy" = "{{upstreams 4110}}";
+        "caddy.reverse_proxy" = "koito:4110";
       };
     };
     multi-scrobbler = {
@@ -29,7 +29,11 @@
       labels = {
         "caddy" = "scrobbler.spaceman.one";
         "caddy.import" = "common";
-        "caddy.reverse_proxy" = "{{upstreams 9078}}";
+        "caddy.@api.path" = "/1/* /api/listenbrainz* /api/webscrobbler* /2.0/* /api/lastfm*";
+        "caddy.handle" = "@api";
+        "caddy.respond" = "403";
+        "caddy.respond.close" = "";
+        "caddy.handle.reverse_proxy" = "multi-scrobbler:9078";
       };
     };
     scrobbler-cache = {
