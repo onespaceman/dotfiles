@@ -3,6 +3,7 @@
     image = "codeberg.org/forgejo/forgejo:16-rootless";
     hostname = "git";
     autoStart = true;
+    autoRemoveOnStop = false;
     environment = {
       USER_UID = "1000";
       USER_GID = "100";

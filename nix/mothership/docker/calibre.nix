@@ -3,6 +3,7 @@
     image = "crocodilestick/calibre-web-automated:latest";
     hostname = "calibre";
     autoStart = true;
+    autoRemoveOnStop = false;
     environment = {
       PUID = "1000";
       PGID = "100";

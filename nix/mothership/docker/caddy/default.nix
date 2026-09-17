@@ -53,6 +53,7 @@ in {
     # image = "ghcr.io/serfriz/caddy-cloudflare-ddns-crowdsec-geoip-security-dockerproxy:latest";
     hostname = "caddy";
     autoStart = true;
+    autoRemoveOnStop = false;
     environment = {
       CADDY_INGRESS_NETWORKS = "pub";
     };

@@ -3,6 +3,7 @@
     image = "ghcr.io/crazy-max/rtorrent-rutorrent:latest";
     hostname = "rt";
     autoStart = true;
+    autoRemoveOnStop = false;
     environment = {
       PUID = "1000";
       PGID = "100";

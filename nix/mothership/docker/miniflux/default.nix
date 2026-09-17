@@ -6,6 +6,7 @@
       image = "miniflux/miniflux:latest";
       hostname = "miniflux";
       autoStart = true;
+      autoRemoveOnStop = false;
       dependsOn = ["miniflux-db"];
       environmentFiles = [config.age.secrets.miniflux.path];
       networks = ["priv" "pub"];

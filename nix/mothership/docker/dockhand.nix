@@ -3,6 +3,7 @@
     image = "fnsys/dockhand:latest";
     hostname = "dockhand";
     autoStart = true;
+    autoRemoveOnStop = false;
     extraOptions = ["--group-add=131"];
     networks = ["pub"];
     ports = ["8080:3000"];

@@ -3,6 +3,7 @@
     image = "deluan/navidrome:latest";
     hostname = "navidrome";
     autoStart = true;
+    autoRemoveOnStop = false;
     environment = {
       PUID = "1000";
       PGID = "100";

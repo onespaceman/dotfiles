@@ -3,6 +3,7 @@
     image = "lscr.io/linuxserver/beets:latest";
     hostname = "beets";
     autoStart = true;
+    autoRemoveOnStop = false;
     environment = {
       PUID = "1000";
       PGID = "100";

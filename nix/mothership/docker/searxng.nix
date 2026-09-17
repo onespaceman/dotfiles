@@ -4,6 +4,7 @@
       image = "searxng/searxng:latest";
       hostname = "searxng";
       autoStart = true;
+      autoRemoveOnStop = false;
       environment = {
         SEARXNG_VALKEY_URL = "valkey://searxng-cache:6379/0";
       };

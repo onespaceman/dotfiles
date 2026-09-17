@@ -5,6 +5,7 @@
     image = "pocketid/pocket-id:v2";
     hostname = "pocketid";
     autoStart = true;
+    autoRemoveOnStop = false;
     networks = ["pub"];
     ports = ["1411:1411"];
     environment = {

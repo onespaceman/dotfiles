@@ -3,6 +3,7 @@
     image = "lscr.io/linuxserver/jellyfin";
     hostname = "jellyfin";
     autoStart = true;
+    autoRemoveOnStop = false;
     devices = ["/dev/dri:/dev/dri"];
     environment = {
       PUID = "1000";

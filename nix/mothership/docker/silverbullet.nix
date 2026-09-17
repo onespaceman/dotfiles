@@ -3,6 +3,7 @@
     image = "ghcr.io/silverbulletmd/silverbullet:v2";
     hostname = "silverbullet";
     autoStart = true;
+    autoRemoveOnStop = false;
     user = "1000:100";
     networks = ["pub"];
     ports = ["3000:3000/tcp"];

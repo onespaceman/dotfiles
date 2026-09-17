@@ -4,6 +4,7 @@
       image = "gabehf/koito:latest";
       hostname = "koito";
       autoStart = true;
+      autoRemoveOnStop = false;
       networks = ["pub"];
       ports = ["4110:4110"];
       volumes = ["/docker/koito:/etc/koito"];
