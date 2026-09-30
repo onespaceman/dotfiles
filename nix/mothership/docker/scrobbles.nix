@@ -18,6 +18,7 @@
       image = "ghcr.io/foxxmd/multi-scrobbler:latest";
       hostname = "multi-scrobbler";
       autoStart = true;
+      autoRemoveOnStop = false;
       environment = {
         TZ = "America/New_York";
         PUID = "1000";
@@ -41,6 +42,7 @@
       image = "valkey/valkey:9-alpine";
       hostname = "scrobbler-cache";
       autoStart = true;
+      autoRemoveOnStop = false;
       networks = ["priv"];
       volumes = ["/docker/multiscrobbler/cache:/data"];
       cmd = ["valkey-server" "--save" "30" "1" "--loglevel" "warning"];

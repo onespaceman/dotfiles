@@ -69,9 +69,12 @@ in {
       "caddy_0.dynamic_dns.provider" = "cloudflare {env.CLOUDFLARE_TOKEN}";
       "caddy_0.dynamic_dns.domains.spaceman\\.one" = "*";
       "caddy_0.dynamic_dns.versions" = "ipv6";
-      "caddy_1" = "(common)";
-      "caddy_1.geoblock.db_path" = "/GeoLite2-Country.mmdb";
-      "caddy_1.geoblock.allow_countries" = "US";
+      "caddy_1" = "*.spaceman.one";
+      "caddy_1.0_tls.dns" = "cloudflare {env.CLOUDFLARE_TOKEN}";
+      "caddy_1.1_abort" = "";
+      "caddy_2" = "(common)";
+      "caddy_2.geoblock.db_path" = "/GeoLite2-Country.mmdb";
+      "caddy_2.geoblock.allow_countries" = "US";
     };
   };
 }

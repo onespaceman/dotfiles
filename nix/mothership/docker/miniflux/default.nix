@@ -21,6 +21,7 @@
       image = "postgres:18";
       hostname = "miniflux-db";
       autoStart = true;
+      autoRemoveOnStop = false;
       environmentFiles = [config.age.secrets.miniflux.path];
       networks = ["priv"];
       volumes = ["/docker/miniflux:/var/lib/postgresql"];
