@@ -15,7 +15,7 @@
       "/mnt/3/mus:/music"
     ];
     labels = {
-      "caddy" = "mus.spaceman.one";
+      "caddy" = "mus.{$URL}";
       "caddy.import" = "common";
       "caddy.reverse_proxy" = "navidrome:4533";
     };

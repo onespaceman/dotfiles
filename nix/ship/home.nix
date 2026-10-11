@@ -77,9 +77,9 @@
             {
               Name = "searchy";
               Description = "searchy";
-              IconURL = "https://s.spaceman.one/static/themes/simple/img/favicon.png";
+              IconURL = "https://s.spaceman.one/public/favicon/favicon.ico";
               URLTemplate = "https://s.spaceman.one/search?q={searchTerms}";
-              SuggestURLTemplate = "https://s.spaceman.one/autocomplete?q={searchTerms}";
+              SuggestURLTemplate = "https://s.spaceman.one/api/suggest/opensearch?q={searchTerms}";
             }
           ];
           Remove = [

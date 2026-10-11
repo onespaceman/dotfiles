@@ -24,7 +24,7 @@
       "/mnt/1/mov/movies/:/data/movies"
     ];
     labels = {
-      "caddy" = "jf.spaceman.one";
+      "caddy" = "jf.{$URL}";
       "caddy.import" = "common";
       "caddy.reverse_proxy" = "jellyfin:8096";
     };

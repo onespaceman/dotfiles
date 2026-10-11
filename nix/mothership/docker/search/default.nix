@@ -16,7 +16,7 @@
       ports = ["4444:4444"];
       volumes = ["/docker/degoog:/app/data"];
       labels = {
-        "caddy" = "s.spaceman.one";
+        "caddy" = "s.{$URL}";
         "caddy.import" = "common";
         "caddy.reverse_proxy" = "degoog:4444";
       };

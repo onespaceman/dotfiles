@@ -24,7 +24,7 @@
       "/mnt/1/dl/watch:/data/rtorrent/watch"
     ];
     labels = {
-      "caddy" = "rt.spaceman.one";
+      "caddy" = "rt.{$URL}";
       "caddy.import" = "common";
       "caddy.reverse_proxy" = "rt:8080";
     };

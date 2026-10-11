@@ -12,7 +12,7 @@
       "/docker/dockhand:/app/data"
     ];
     labels = {
-      "caddy" = "d.spaceman.one";
+      "caddy" = "d.{$URL}";
       "caddy.import" = "common";
       "caddy.reverse_proxy" = "dockhand:3000";
     };

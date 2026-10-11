@@ -16,7 +16,7 @@
       "/mnt/3/book:/calibre-library"
     ];
     labels = {
-      "caddy" = "book.spaceman.one";
+      "caddy" = "book.{$URL}";
       "caddy.import" = "common";
       "caddy.reverse_proxy" = "calibre:8083";
     };

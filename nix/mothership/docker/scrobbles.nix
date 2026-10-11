@@ -9,7 +9,7 @@
       ports = ["4110:4110"];
       volumes = ["/docker/koito:/etc/koito"];
       labels = {
-        "caddy" = "scrobble.spaceman.one";
+        "caddy" = "scrobble.{$URL}";
         "caddy.import" = "common";
         "caddy.reverse_proxy" = "koito:4110";
       };
@@ -29,7 +29,7 @@
       ports = ["9078:9078"];
       volumes = ["/docker/multiscrobbler:/config"];
       labels = {
-        "caddy" = "scrobbler.spaceman.one";
+        "caddy" = "scrobbler.{$URL}";
         "caddy.import" = "common";
         "caddy.@api.path" = "/1/* /api/listenbrainz* /api/webscrobbler* /2.0/* /api/lastfm*";
         "caddy.handle" = "@api";

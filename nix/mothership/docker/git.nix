@@ -24,7 +24,7 @@
       "/etc/localtime:/etc/localtime:ro"
     ];
     labels = {
-      "caddy" = "git.spaceman.one";
+      "caddy" = "git.{$URL}";
       "caddy.import" = "common";
       "caddy.reverse_proxy" = "git:3000";
     };

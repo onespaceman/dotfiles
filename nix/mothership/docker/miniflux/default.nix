@@ -12,7 +12,7 @@
       networks = ["priv" "pub"];
       ports = ["51111:8080/tcp"];
       labels = {
-        "caddy" = "feed.spaceman.one";
+        "caddy" = "feed.{$URL}";
         "caddy.import" = "common";
         "caddy.reverse_proxy" = "miniflux:8080";
       };

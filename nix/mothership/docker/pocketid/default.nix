@@ -9,16 +9,14 @@
     networks = ["pub"];
     ports = ["1411:1411"];
     environment = {
-      APP_URL = "https://auth.spaceman.one";
       SESSION_DURATION = "1440";
-      # TRUST_PROXY = "true";
     };
     environmentFiles = [config.age.secrets.pocketid.path];
     volumes = [
       "/docker/pocketid:/app/data"
     ];
     labels = {
-      "caddy" = "auth.spaceman.one";
+      "caddy" = "auth.{$URL}";
       "caddy.import" = "common";
       "caddy.reverse_proxy" = "pocketid:1411";
     };
