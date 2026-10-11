@@ -18,7 +18,7 @@
     stateVersion = "24.05";
     activationScripts.diff = {
       supportsDryActivation = true;
-      text = ''${lib.getExe pkgs.nvd} --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"'';
+      text = ''${lib.getExe pkgs.dix} /run/current-system "$systemConfig"'';
     };
   };
 

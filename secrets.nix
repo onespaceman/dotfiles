@@ -6,6 +6,7 @@ in {
   "nix/mothership/backup/restic.age".publicKeys = all;
   "nix/mothership/ups/ups.age".publicKeys = all;
   "nix/mothership/docker/caddy/caddy.age".publicKeys = all;
+  "nix/mothership/docker/search/degoog.age".publicKeys = all;
   "nix/mothership/docker/pocketid/pocketid.age".publicKeys = all;
   "nix/mothership/docker/miniflux/miniflux.age".publicKeys = all;
   "nix/mothership/docker/silverbullet/silverbullet.age".publicKeys = all;

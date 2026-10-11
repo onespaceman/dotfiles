@@ -14,7 +14,7 @@
     ./navidrome.nix
     ./pocketid
     ./rt.nix
-    ./searxng.nix
+    ./search
     ./scrobbles.nix
     ./silverbullet.nix
   ];
