@@ -41,7 +41,10 @@
       unzip
       xz
     ];
-    variables.EDITOR = "hx";
+    variables = {
+      EDITOR = "hx";
+      LESS = "-R -F --mouse";
+    };
     shells = [pkgs.nushell];
   };
 
