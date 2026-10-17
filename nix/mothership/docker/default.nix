@@ -1,11 +1,7 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
+    ./audiobookshelf.nix
     ./beets.nix
-    ./calibre.nix
     ./caddy
     ./dockhand.nix
     ./git.nix

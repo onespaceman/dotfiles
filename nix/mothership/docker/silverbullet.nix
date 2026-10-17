@@ -13,7 +13,7 @@
       "caddy_0.import" = "common";
       "caddy_0.reverse_proxy" = "silverbullet:3000";
       "caddy_1" = "note.{$URL}";
-      # "caddy_1.import" = "common";
+      "caddy_1.import" = "common";
       "caddy_1.reverse_proxy" = "silverbullet:3000";
     };
   };

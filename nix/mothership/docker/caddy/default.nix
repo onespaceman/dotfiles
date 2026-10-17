@@ -34,7 +34,7 @@
       paths = [
         (pkgs.runCommand "configs" {} ''
           mkdir -p $out/config
-          ln -s ${baseConfig} $out/config/base.caddy
+          ln -s ${./base.caddy} $out/config/base.caddy
           ln -s ${geolite2Country} $out/config/GeoLite2-Country.mmdb
         '')
         caddyWithPlugins
@@ -52,41 +52,6 @@
     url = "https://github.com/P3TERX/GeoLite.mmdb/releases/download/2026.10.10/GeoLite2-Country.mmdb";
     sha256 = "sha256:07g5m40m97j8wlrgspza3w50wh6wriszgqy2a0lkli642bj7hl33";
   };
-
-  baseConfig = pkgs.writeText "caddy_config" ''
-    {
-    	dynamic_dns {
-    		domains {
-    			{$URL} *
-    		}
-    		provider cloudflare {env.CLOUDFLARE_TOKEN}
-    		versions ipv6
-    	}
-    	order coraza_waf first
-    }
-    (common) {
-    	geoblock {
-    		allow_countries US
-    		db_path /config/GeoLite2-Country.mmdb
-    	}
-    	coraza_waf {
-    		load_owasp_crs
-    		directives `
-         Include @coraza.conf-recommended
-         Include @crs-setup.conf.example
-         Include @owasp_crs/*.conf
-         SecRuleEngine On
-        `
-    		tx_id_req_header X-Transaction-ID
-    	}
-    }
-    *.{$URL} {
-    	tls {
-    		dns cloudflare {env.CLOUDFLARE_TOKEN}
-    	}
-      abort
-    }
-  '';
 in {
   networking.firewall.allowedTCPPorts = [80 443];
   age.secrets.caddy.file = ./caddy.age;

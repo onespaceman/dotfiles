@@ -1,0 +1,37 @@
+{
+	dynamic_dns {
+		domains {
+			{$URL} *
+		}
+		provider cloudflare {env.CLOUDFLARE_TOKEN}
+		versions ipv6
+	}
+	order coraza_waf first
+}
+
+(common) {
+	geoblock {
+		allow_countries US
+		db_path /config/GeoLite2-Country.mmdb
+	}
+	coraza_waf {
+		load_owasp_crs
+		directives `
+		SecAction "id:900200,phase:1,pass,t:none,nolog,tag:'OWASP_CRS',ver:'OWASP_CRS/4.14.0',setvar:'tx.allowed_methods=GET HEAD POST OPTIONS PATCH DELETE'"
+		SecRule REQUEST_URI "@beginsWith /audiobookshelf" "id:10001,phase:1,pass,nolog,ctl:ruleRemoveById=932235"
+		SecRule REQUEST_URI "@beginsWith /.config" "id:10002,phase:1,pass,nolog,ctl:ruleRemoveById=920440"
+		SecRule REQUEST_URI "@beginsWith /.config" "id:10003,phase:1,pass,nolog,ctl:ruleRemoveById=930130"
+		Include @coraza.conf-recommended
+		Include @crs-setup.conf.example
+		Include @owasp_crs/*.conf
+		SecRuleEngine On
+		`
+	}
+}
+
+*.{$URL} {
+	tls {
+		dns cloudflare {env.CLOUDFLARE_TOKEN}
+	}
+	abort
+}
