@@ -17,10 +17,19 @@
 	coraza_waf {
 		load_owasp_crs
 		directives `
-		SecAction "id:900200,phase:1,pass,t:none,nolog,tag:'OWASP_CRS',ver:'OWASP_CRS/4.14.0',setvar:'tx.allowed_methods=GET HEAD POST OPTIONS PATCH DELETE'"
-		SecRule REQUEST_URI "@beginsWith /audiobookshelf" "id:10001,phase:1,pass,nolog,ctl:ruleRemoveById=932235"
-		SecRule REQUEST_URI "@beginsWith /.config" "id:10002,phase:1,pass,nolog,ctl:ruleRemoveById=920440"
-		SecRule REQUEST_URI "@beginsWith /.config" "id:10003,phase:1,pass,nolog,ctl:ruleRemoveById=930130"
+		# allow methods
+		SecAction "id:900200,phase:1,pass,t:none,nolog,tag:'OWASP_CRS',ver:'OWASP_CRS/4.14.0',setvar:'tx.allowed_methods=GET HEAD POST OPTIONS PUT PATCH DELETE'"
+		SecRule REQUEST_HEADERS:Host "@beginsWith book." "id:10001,phase:1,pass,nolog,ctl:ruleRemoveById=932235"
+		SecRule REQUEST_HEADERS:Host "@beginsWith note." "id:10002,phase:1,pass,nolog,\
+			ctl:ruleRemoveById=920440,\
+			ctl:ruleRemoveById=930130"
+		SecRule REQUEST_HEADERS:Host "@beginsWith s." "id:10003,phase:1,pass,nolog,\
+			ctl:ruleRemoveByTag=attack-rce,\
+			ctl:ruleRemoveById=930120,\
+			ctl:ruleRemoveById=941390"
+		SecRule REQUEST_HEADERS:Host "@beginsWith auth." "id:10004,phase:1,pass,nolog,\
+			ctl:ruleRemoveById=930120,\
+			ctl:ruleRemoveById=930130"
 		Include @coraza.conf-recommended
 		Include @crs-setup.conf.example
 		Include @owasp_crs/*.conf

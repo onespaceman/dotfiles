@@ -3,7 +3,7 @@
     ./audiobookshelf.nix
     ./beets.nix
     ./caddy
-    ./dockhand.nix
+    ./dozzle
     ./git.nix
     ./jellyfin.nix
     ./miniflux
