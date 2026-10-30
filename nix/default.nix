@@ -82,5 +82,8 @@
   };
 
   # agenix secrets
-  age.identityPaths = ["${config.users.users.spaceman.home}/.ssh//id_ed25519"];
+  age = {
+    identityPaths = ["${config.users.users.spaceman.home}/.ssh//id_ed25519"];
+    verbosity = "summary";
+  };
 }

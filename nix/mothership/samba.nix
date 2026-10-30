@@ -33,10 +33,14 @@
     };
 
     avahi = {
-      publish.enable = true;
-      publish.userServices = true;
-      nssmdns4 = true;
       enable = true;
+      settings.publish = {
+        disable-user-service-publishing = false;
+        disable-publishing = false;
+        publish-addresses = true;
+        publish-domain = true;
+      };
+      nssmdns4 = true;
       openFirewall = true;
     };
   };

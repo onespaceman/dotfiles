@@ -19,7 +19,7 @@
       "github.com/mholt/caddy-dynamicdns@v0.0.0-20260805195708-67d107a42c02"
       "github.com/anujc4/caddy-geoblock@v0.1.2"
     ];
-    hash = "sha256-oTaNvTQjDFtOp5WFZLNI+XCVUzol47u7F/qDWULy2q0=";
+    hash = "sha256-AMG5ipViAMRalRf3jQIOu7kFZRAuX7sOxyEgzDcTuHY=";
   };
   # Build caddy image
   caddy = pkgs.dockerTools.buildImage {
@@ -48,7 +48,7 @@
 
   # Maxmind geolite database
   geolite2Country = builtins.fetchurl {
-    url = "https://github.com/P3TERX/GeoLite.mmdb/releases/download/2026.10.10/GeoLite2-Country.mmdb";
+    url = "https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb";
     sha256 = "sha256:07g5m40m97j8wlrgspza3w50wh6wriszgqy2a0lkli642bj7hl33";
   };
 in {

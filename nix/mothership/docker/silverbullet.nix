@@ -7,7 +7,7 @@
     user = "1000:100";
     networks = ["pub"];
     ports = ["3000:3000/tcp"];
-    volumes = ["/home/spaceman/notes:/space"];
+    volumes = ["/home/spaceman/notes:/data"];
     labels = {
       "caddy_0" = "sb.{$URL}";
       "caddy_0.import" = "common";
