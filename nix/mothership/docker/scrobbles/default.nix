@@ -1,4 +1,6 @@
-{
+{config, ...}: {
+  age.secrets.multiscrobbler.file = ./multiscrobbler.age;
+
   virtualisation.oci-containers.containers = {
     koito = {
       image = "gabehf/koito:latest";
@@ -23,11 +25,14 @@
         TZ = "America/New_York";
         PUID = "1000";
         PGID = "100";
-        CACHE_VALKEY = "redis://scrobbler-cache:6379";
       };
-      networks = ["pub"];
+      environmentFiles = [config.age.secrets.multiscrobbler.path];
+      networks = ["pub" "priv"];
       ports = ["9078:9078"];
-      volumes = ["/docker/multiscrobbler:/config"];
+      volumes = [
+        "/docker/multiscrobbler:/config"
+        "${./multiscrobbler.json}:/config/config.json"
+      ];
       labels = {
         "caddy" = "scrobbler.{$URL}";
         "caddy.import" = "common";
@@ -37,6 +42,7 @@
         "caddy.respond.close" = "";
         "caddy.handle.reverse_proxy" = "multi-scrobbler:9078";
       };
+      dependsOn = ["scrobbler-cache"];
     };
     scrobbler-cache = {
       image = "valkey/valkey:9-alpine";

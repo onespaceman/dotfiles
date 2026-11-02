@@ -1,0 +1,131 @@
+{
+  "cache": {
+    "valkey": "redis://scrobbler-cache:6379",
+    "auth": {
+      "provider": "valkey"
+    }
+  },
+  "sourceDefaults": {
+    "logPayload": true,
+    "playTransform": {
+      "log": true,
+      "preCompare": [
+        {
+          "type": "musicbrainz",
+          "name": "mb",
+          "onSuccess": "stop",
+          "onFailure": "continue"
+        },
+        {
+          "type": "native"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "name": "WebScrobbler",
+      "id": "webscrobbler",
+      "type": "webscrobbler",
+      "enable": true,
+      "data": {
+        "slug": "ws",
+        "whitelist": [],
+        "blacklist": []
+      },
+      "options": {
+        "playTransform": {
+          "preCompare": [
+            {
+              "type": "musicbrainz",
+              "name": "mb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "listenbrainz",
+      "id": "listenbrainz",
+      "type": "endpointlz",
+      "enable": true,
+      "data": {
+        "token": "listenbrainz"
+      },
+      "options": {
+        "playTransform": {
+          "preCompare": [
+            {
+              "type": "musicbrainz",
+              "name": "mb"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "clients": [
+    {
+      "type": "koito",
+      "id": "koito-client",
+      "name": "koito-client",
+      "configureAs": "client",
+      "data": {
+        "token": "[[MY_KOITO_TOKEN]]",
+        "username": "[[MY_KOITO_USER]]",
+        "url": "http://koito:4110"
+      }
+    },
+    {
+      "type": "lastfm",
+      "id": "lastfm-client",
+      "name": "lastfm-client",
+      "enable": true,
+      "configureAs": "client",
+      "data": {
+        "apiKey": "[[MY_LASTFM_KEY]]",
+        "secret": "[[MY_LASTFM_SECRET]]",
+        "redirectUri": "[[MY_LASTFM_URI]]"
+      }
+    }
+  ],
+  "transformers": [
+    {
+      "type": "musicbrainz",
+      "name": "mb",
+      "data": {
+        "apis": [
+          {
+            "enable": true
+          },
+          {
+            "enable": true,
+            "url": "https://api.brainzmash.cc"
+          }
+        ]
+      },
+      "defaults": {
+        "score": 95,
+        "releaseStatusDeny": [
+          "bootleg"
+        ],
+        "releaseStatusPriority": [
+          "official"
+        ],
+        "releaseGroupPrimaryTypePriority": [
+          "album",
+          "ep",
+          "single"
+        ],
+        "releaseCountryPriority": [
+          "XW"
+        ],
+        "releaseFormatPriority": [
+          "Digital Media",
+          "Compact Disc",
+          "CD"
+        ]
+      }
+    }
+  ]
+}

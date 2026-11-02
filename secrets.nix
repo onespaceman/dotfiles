@@ -10,5 +10,6 @@ in {
   "nix/mothership/docker/dozzle/dozzle.age".publicKeys = all;
   "nix/mothership/docker/pocketid/pocketid.age".publicKeys = all;
   "nix/mothership/docker/miniflux/miniflux.age".publicKeys = all;
+  "nix/mothership/docker/scrobbles/multiscrobbler.age".publicKeys = all;
   "nix/mothership/docker/silverbullet/silverbullet.age".publicKeys = all;
 }

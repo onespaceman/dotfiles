@@ -11,7 +11,7 @@
     ./pocketid
     ./rt.nix
     ./search
-    ./scrobbles.nix
+    ./scrobbles
     ./silverbullet.nix
   ];
 
