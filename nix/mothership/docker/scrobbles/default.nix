@@ -21,10 +21,9 @@
       hostname = "multi-scrobbler";
       autoStart = true;
       autoRemoveOnStop = false;
+      user = "1000:100";
       environment = {
-        TZ = "America/New_York";
-        PUID = "1000";
-        PGID = "100";
+        AUTH_MODE = "disabled";
       };
       environmentFiles = [config.age.secrets.multiscrobbler.path];
       networks = ["pub" "priv"];

@@ -19,7 +19,7 @@
       "github.com/mholt/caddy-dynamicdns@v0.0.0-20260805195708-67d107a42c02"
       "github.com/anujc4/caddy-geoblock@v0.1.2"
     ];
-    hash = "sha256-AMG5ipViAMRalRf3jQIOu7kFZRAuX7sOxyEgzDcTuHY=";
+    hash = "sha256-zu9XWsb12ghiRccONPnDzUrlqmV/LdE+4Zb4rZMuETw=";
   };
   # Build caddy image
   caddy = pkgs.dockerTools.buildImage {

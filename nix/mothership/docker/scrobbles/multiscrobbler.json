@@ -106,6 +106,12 @@
       },
       "defaults": {
         "score": 95,
+        "searchArtistMethod": "native",
+        "searchOrder": [
+          "isrc",
+          "basic",
+          "artist"
+        ],
         "releaseStatusDeny": [
           "bootleg"
         ],

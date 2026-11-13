@@ -4,7 +4,6 @@
 			{$URL} *
 		}
 		provider cloudflare {env.CLOUDFLARE_TOKEN}
-		versions ipv6
 	}
 	order coraza_waf first
 }
@@ -17,6 +16,7 @@
 	coraza_waf {
 		load_owasp_crs
 		directives `
+		SecDebugLogLevel 1
 		# allow methods
 		SecAction "id:900200,phase:1,pass,t:none,nolog,tag:'OWASP_CRS',ver:'OWASP_CRS/4.14.0',setvar:'tx.allowed_methods=GET HEAD POST OPTIONS PUT PATCH DELETE'"
 		SecRule REQUEST_HEADERS:Host "@beginsWith auth." "id:10001,phase:1,pass,nolog,\
@@ -24,22 +24,33 @@
 			ctl:ruleRemoveById=930130"
 		SecRule REQUEST_HEADERS:Host "@beginsWith book." "id:10002,phase:1,pass,nolog,\
 			ctl:ruleRemoveById=932235"
-		SecRule REQUEST_HEADERS:Host "@beginsWith note." "id:10003,phase:1,pass,nolog,\
+		SecRule REQUEST_HEADERS:Host "@beginsWith feed." "id:10003,phase:1,pass,nolog,\
+			ctl:ruleRemoveById=941170,\
+			ctl:ruleRemoveById=941390"
+		SecRule REQUEST_HEADERS:Host "@beginsWith jf." "id:10004,phase:1,pass,nolog,\
+			ctl:ruleRemoveById=930130"
+		SecRule REQUEST_HEADERS:Host "@beginsWith note." "id:10005,phase:1,pass,nolog,\
 			ctl:ruleRemoveById=920440,\
 			ctl:ruleRemoveById=930130"
-		SecRule REQUEST_HEADERS:Host "@beginsWith s." "id:10004,phase:1,pass,nolog,\
+		SecRule REQUEST_HEADERS:Host "@beginsWith s." "id:10006,phase:1,pass,nolog,\
 			ctl:ruleRemoveById=920420,\
-			ctl:ruleRemoveByTag=attack-xss;ARGS;q,\
-			ctl:ruleRemoveByTag=attack-rce;ARGS;q,\
-			ctl:ruleRemoveByTag=attack-sqli;ARGS:q"
-		SecRule REQUEST_HEADERS:Host "@beginsWith scrobble." "id:10005,phase:1,pass,nolog,\
+			ctl:ruleRemoveByTag=application-multi;ARGS;q"
+		SecRule REQUEST_URI "@beginsWith /api/slots" "id:10007,phase:1,pass,nolog,\
+			ctl:ruleRemoveByTag=application-multi"
+		SecRule REQUEST_HEADERS:Host "@beginsWith scrobble" "id:10008,phase:1,pass,nolog,\
 			ctl:ruleRemoveById=941390,\
-			ctl:ruleRemoveById=920420"
+			ctl:ruleRemoveById=932340,\
+			ctl:ruleRemoveById=920420,\
+			ctl:ruleRemoveById=932125"
 		Include @coraza.conf-recommended
 		Include @crs-setup.conf.example
 		Include @owasp_crs/*.conf
 		SecRuleEngine On
 		`
+	}
+	handle_errors {
+	 @waf expression `{http.error.message}.startsWith("interruption triggered")`
+	 respond @waf "Blocked by the WAF: {http.error.message}" 403
 	}
 }
 
