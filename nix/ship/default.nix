@@ -15,7 +15,6 @@
       timeout = 0;
     };
     consoleLogLevel = 3;
-    initrd.verbose = false;
     kernelParams = [
       "quiet"
       "udev.log_level=3"
@@ -110,4 +109,17 @@
   #     ];
   #   };
   # };
+
+  # Fonts
+  fonts.packages = [
+    (pkgs.iosevka.override
+      {
+        privateBuildPlan = {
+          family = "Iosevka Term";
+          spacing = "term";
+          serifs = "sans";
+          noLigation = true;
+        };
+      })
+  ];
 }

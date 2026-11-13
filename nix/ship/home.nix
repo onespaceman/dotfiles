@@ -9,16 +9,6 @@
     packages = with pkgs; [
       blender
       ffmpeg
-      (iosevka.override
-        {
-          privateBuildPlan = {
-            family = "Iosevka Term";
-            spacing = "term";
-            serifs = "sans";
-          };
-        })
-      kara # plasma panel nav
-      klassy
       krita
       qview
       transmission_4-qt
@@ -108,7 +98,8 @@
         main = {
           shell = "/run/current-system/sw/bin/tmux";
           font = "Iosevka Term:size=12";
-          initial-window-size-chars = "170x35";
+          initial-window-size-chars = "180x40";
+          pad = "10x10 center-when-maximized-and-fullscreen";
         };
         cursor.style = "beam";
         scrollback.lines = 10000;

@@ -5,6 +5,7 @@
 }: {
   home.packages = [
     pkgs.klassy
+    pkgs.kara # plasma panel nav
   ];
 
   xdg.dataFile."color-schemes/Frankenstyle.colors".source = ./Frankenstyle.colors;
@@ -78,17 +79,11 @@
             }
             "org.kde.plasma.panelspacer"
             {
-              kicker = {
-                behavior = {
-                  sortAlphabetically = true;
-                  flattenCategories = true;
-                };
-                categories = {
-                  show = {
-                    recentApplications = false;
-                    recentFiles = false;
-                  };
-                };
+              kickoff = {
+                sortAlphabetically = true;
+                applicationsDisplayMode = "list";
+                favoritesDisplayMode = "list";
+                showButtonsFor = "power";
               };
             }
             {
